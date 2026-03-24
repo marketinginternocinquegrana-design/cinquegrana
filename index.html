@@ -3,1930 +3,716 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#c8102e">
 <title>Cinquegrana Scavolini</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --red: #c8102e;
-  --red-dark: #a00d24;
-  --red-light: #f5e6e9;
-  --black: #111111;
-  --gray-dark: #2a2a2a;
-  --gray: #666;
-  --gray-light: #f4f4f2;
-  --white: #ffffff;
-  --cream: #faf9f7;
-  --gold: #b8963e;
-  --radius: 12px;
-  --shadow: 0 4px 24px rgba(0,0,0,0.08);
-  --shadow-lg: 0 12px 48px rgba(0,0,0,0.14);
-}
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  :root {
+    --rosso: #C0392B;
+    --rosso-dark: #96281B;
+    --nero: #1a1a1a;
+    --grigio-scuro: #2c2c2c;
+    --grigio-medio: #888;
+    --grigio-chiaro: #f4f2ef;
+    --bianco: #fff;
+    --font-title: 'Cormorant Garamond', serif;
+    --font-body: 'Montserrat', sans-serif;
+  }
+  body { font-family: var(--font-body); background: var(--grigio-chiaro); color: var(--nero); min-height:100vh; }
 
-* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  /* ─── VIEWS ─── */
+  .view { display:none; flex-direction:column; min-height:100vh; }
+  .view.active { display:flex; }
 
-body {
-  font-family: 'DM Sans', sans-serif;
-  background: var(--cream);
-  color: var(--black);
-  min-height: 100vh;
-  max-width: 430px;
-  margin: 0 auto;
-  position: relative;
-  overflow-x: hidden;
-}
+  /* ─── HEADER ─── */
+  .header {
+    background: var(--nero);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky; top:0; z-index:100;
+  }
+  .header-logo { display:flex; align-items:center; gap:12px; }
+  .logo-icon {
+    width:38px; height:38px; background:var(--rosso);
+    border-radius:6px; display:flex; align-items:center; justify-content:center;
+  }
+  .logo-icon span { color:#fff; font-family: var(--font-title); font-size:22px; font-weight:600; line-height:1; }
+  .logo-text { display:flex; flex-direction:column; }
+  .logo-text .brand { color:#fff; font-family: var(--font-title); font-size:18px; font-weight:600; letter-spacing:0.5px; }
+  .logo-text .sub { color:#aaa; font-size:9px; letter-spacing:2px; text-transform:uppercase; margin-top:-1px; }
+  .scavolini-badge {
+    color:#fff; font-size:13px; font-weight:300; letter-spacing:4px;
+    text-transform:uppercase; border-left:1px solid #444; padding-left:12px;
+    font-family: var(--font-body);
+  }
 
-/* HEADER */
-.header {
-  background: var(--black);
-  color: var(--white);
-  padding: 18px 20px 14px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.3);
-}
-.header-logo {
-  width: 38px; height: 38px;
-  background: var(--red);
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 20px; font-weight: 600; color: white; flex-shrink: 0;
-}
-.header-text { flex: 1; }
-.header-brand { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; letter-spacing: 0.3px; line-height: 1.2; }
-.header-sub { font-size: 10px; color: rgba(255,255,255,0.5); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 1px; }
+  /* ─── HERO ─── */
+  .hero {
+    background: linear-gradient(135deg, #2c1810 0%, #1a1a1a 50%, #3d1f1a 100%);
+    padding: 28px 20px 24px;
+    position: relative; overflow: hidden;
+  }
+  .hero::after {
+    content:''; position:absolute; top:0;right:0;bottom:0;
+    width:40%; background: linear-gradient(to left, rgba(192,57,43,0.12), transparent);
+  }
+  .hero-tag { color: rgba(255,255,255,0.5); font-size:10px; letter-spacing:3px; text-transform:uppercase; margin-bottom:8px; }
+  .hero h1 { color:#fff; font-family: var(--font-title); font-size:36px; font-weight:300; line-height:1.15; }
+  .hero h1 strong { font-weight:600; }
+  .hero p { color:rgba(255,255,255,0.55); font-size:12px; margin-top:6px; letter-spacing:1px; }
 
-/* NAV TABS */
-.nav {
-  background: var(--white);
-  display: flex;
-  border-bottom: 2px solid var(--gray-light);
-  position: sticky; top: 70px; z-index: 99;
-  overflow-x: auto; scrollbar-width: none;
-}
-.nav::-webkit-scrollbar { display: none; }
-.nav-btn {
-  flex: 1; min-width: 70px;
-  padding: 12px 8px 10px;
-  border: none; background: none; cursor: pointer;
-  font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500;
-  color: var(--gray); letter-spacing: 0.5px; text-transform: uppercase;
-  display: flex; flex-direction: column; align-items: center; gap: 4px;
-  transition: color 0.2s; border-bottom: 2px solid transparent; margin-bottom: -2px; white-space: nowrap;
-}
-.nav-btn .icon { font-size: 18px; }
-.nav-btn.active { color: var(--red); border-bottom-color: var(--red); }
+  /* ─── SCAVOLINI BANNER ─── */
+  .scav-banner {
+    background: linear-gradient(135deg, #2a1810 0%, #1c1c1c 100%);
+    padding: 14px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid rgba(192,57,43,0.3);
+  }
+  .scav-banner-text { display:flex; flex-direction:column; }
+  .scav-banner-name {
+    color:#fff;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 300;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+  }
+  .scav-banner-sub { color: rgba(255,255,255,0.45); font-size:10px; letter-spacing:1.5px; margin-top:3px; }
+  .scav-dot { width:6px; height:6px; border-radius:50%; background:var(--rosso); flex-shrink:0; }
 
-/* PAGES */
-.page { display: none; padding: 20px 16px 100px; animation: fadeIn 0.25s ease; }
-.page.active { display: block; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  /* ─── ACCESSO RAPIDO ─── */
+  .section-label {
+    padding: 18px 20px 10px;
+    font-size: 10px; font-weight:600; letter-spacing:3px;
+    text-transform:uppercase; color:var(--grigio-medio);
+  }
+  .quick-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:0 16px; }
+  .quick-card {
+    background:#fff; border-radius:14px; padding:16px;
+    cursor:pointer; transition:transform 0.15s, box-shadow 0.15s;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .quick-card:active { transform:scale(0.97); }
+  .quick-card.primary { background:var(--rosso); }
+  .quick-card .icon { font-size:26px; margin-bottom:10px; display:block; }
+  .quick-card .card-title { font-size:14px; font-weight:600; color:var(--nero); }
+  .quick-card .card-sub { font-size:11px; color:var(--grigio-medio); margin-top:2px; }
+  .quick-card.primary .card-title { color:#fff; }
+  .quick-card.primary .card-sub { color:rgba(255,255,255,0.7); }
 
-/* HOME PAGE - no padding top, full bleed */
-#page-home { padding: 0 0 100px; }
+  /* ─── ESPLORA / CATALOGO ─── */
+  .catalog-section { padding: 0 16px 10px; }
+  .catalog-link {
+    display:block; background:#fff; border-radius:14px;
+    padding: 18px 20px; text-decoration:none;
+    border:1px solid rgba(0,0,0,0.06);
+    display:flex; align-items:center; gap:16px;
+    transition: transform 0.15s;
+  }
+  .catalog-link:active { transform:scale(0.98); }
+  .catalog-icon-wrap {
+    width:48px; height:48px; background:rgba(192,57,43,0.1);
+    border-radius:12px; display:flex; align-items:center; justify-content:center;
+    flex-shrink:0; font-size:24px;
+  }
+  .catalog-link-text .title { font-size:15px; font-weight:600; color:var(--nero); }
+  .catalog-link-text .sub { font-size:11px; color:var(--grigio-medio); margin-top:2px; }
+  .catalog-arrow { margin-left:auto; color:var(--rosso); font-size:20px; }
 
-/* SECTION TITLE */
-.section-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: var(--black); margin-bottom: 4px; line-height: 1.1; }
-.section-subtitle { font-size: 12px; color: var(--gray); letter-spacing: 0.5px; margin-bottom: 20px; }
+  /* ─── CATALOGO GRID (6 categorie) ─── */
+  .cat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; padding:0 16px; }
+  .cat-card {
+    background:#fff; border-radius:12px; padding:14px 8px;
+    text-align:center; cursor:pointer; border:1px solid rgba(0,0,0,0.06);
+    transition:transform 0.15s;
+  }
+  .cat-card:active { transform:scale(0.96); }
+  .cat-card .cat-icon { font-size:24px; display:block; margin-bottom:6px; }
+  .cat-card .cat-name { font-size:11px; font-weight:500; color:var(--nero); }
 
-/* SEARCH BOX */
-.search-wrap { position: relative; margin-bottom: 16px; }
-.search-input {
-  width: 100%; padding: 13px 16px 13px 44px;
-  border: 1.5px solid #e8e8e6; border-radius: var(--radius);
-  font-family: 'DM Sans', sans-serif; font-size: 14px;
-  background: var(--white); color: var(--black); outline: none; transition: border-color 0.2s;
-}
-.search-input:focus { border-color: var(--red); }
-.search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--gray); font-size: 16px; }
+  /* ─── AMBIENTI ─── */
+  .ambienti-label { padding:18px 20px 10px; font-size:16px; font-family:var(--font-title); font-weight:400; }
+  .ambienti-scroll { display:flex; gap:12px; overflow-x:auto; padding:0 16px 20px; scrollbar-width:none; }
+  .ambienti-scroll::-webkit-scrollbar { display:none; }
+  .amb-card {
+    flex-shrink:0; width:140px; height:100px; border-radius:12px;
+    background: linear-gradient(135deg, #3d3d3d, #1a1a1a);
+    display:flex; align-items:flex-end; padding:10px;
+    cursor:pointer;
+  }
+  .amb-card span { color:#fff; font-size:11px; font-weight:500; }
+  .amb-1 { background: linear-gradient(135deg, #4a3728, #2c1810); }
+  .amb-2 { background: linear-gradient(135deg, #1e3a4a, #0d2030); }
+  .amb-3 { background: linear-gradient(135deg, #2d3a28, #1a2416); }
 
-/* COMMISSIONE CARD */
-.comm-card {
-  background: var(--white); border-radius: var(--radius);
-  padding: 16px; margin-bottom: 10px; box-shadow: var(--shadow);
-  cursor: pointer; transition: transform 0.15s, box-shadow 0.15s;
-  border-left: 4px solid transparent;
-}
-.comm-card:active { transform: scale(0.98); }
-.comm-card.stato-lavorazione { border-left-color: #f59e0b; }
-.comm-card.stato-pronto { border-left-color: #10b981; }
-.comm-card.stato-pianificata { border-left-color: #3b82f6; }
-.comm-card.stato-consegnato { border-left-color: #6b7280; }
-.comm-card.stato-attesa { border-left-color: var(--red); }
-.comm-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
-.comm-id { font-size: 11px; color: var(--gray); letter-spacing: 0.5px; font-weight: 500; }
-.stato-badge { font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: 20px; letter-spacing: 0.3px; }
-.badge-lavorazione { background: #fef3c7; color: #92400e; }
-.badge-pronto { background: #d1fae5; color: #065f46; }
-.badge-pianificata { background: #dbeafe; color: #1e40af; }
-.badge-consegnato { background: #f3f4f6; color: #374151; }
-.badge-attesa { background: #fee2e2; color: #991b1b; }
-.comm-name { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
-.comm-meta { font-size: 12px; color: var(--gray); display: flex; gap: 12px; flex-wrap: wrap; }
-.comm-meta span { display: flex; align-items: center; gap: 4px; }
+  /* ─── BOTTOM NAV ─── */
+  .bottom-nav {
+    background:#fff; border-top:1px solid rgba(0,0,0,0.08);
+    display:flex; position:fixed; bottom:0; left:0; right:0; z-index:100;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .nav-item {
+    flex:1; display:flex; flex-direction:column; align-items:center;
+    padding:10px 4px 8px; cursor:pointer; color:var(--grigio-medio);
+    font-size:9px; font-weight:500; letter-spacing:0.5px;
+    text-transform:uppercase; gap:4px; transition:color 0.15s;
+    border:none; background:none;
+  }
+  .nav-item.active { color:var(--rosso); }
+  .nav-item svg { width:22px; height:22px; stroke-width:1.5; }
+  .spacer { height:80px; }
 
-/* DETAIL MODAL */
-.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 200; align-items: flex-end; }
-.modal-overlay.open { display: flex; animation: fadeIn 0.2s ease; }
-.modal {
-  background: var(--white); border-radius: 20px 20px 0 0;
-  width: 100%; max-width: 430px; margin: 0 auto; padding: 24px 20px 40px;
-  max-height: 85vh; overflow-y: auto; animation: slideUp 0.3s ease;
-}
-@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-.modal-handle { width: 40px; height: 4px; background: #e0e0e0; border-radius: 2px; margin: 0 auto 20px; }
-.modal-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; margin-bottom: 4px; }
-.modal-id { font-size: 12px; color: var(--gray); margin-bottom: 20px; }
-.modal-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--gray-light); }
-.modal-label { font-size: 12px; color: var(--gray); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
-.modal-value { font-size: 14px; font-weight: 500; text-align: right; max-width: 60%; }
-.modal-close {
-  width: 100%; margin-top: 24px; padding: 14px;
-  background: var(--black); color: white; border: none; border-radius: var(--radius);
-  font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; letter-spacing: 0.5px;
-}
+  /* ─── COMMISSIONI VIEW ─── */
+  .page-header {
+    background:#fff; padding:16px 20px;
+    border-bottom:1px solid rgba(0,0,0,0.08);
+  }
+  .page-header h2 { font-size:20px; font-family:var(--font-title); font-weight:400; }
+  .page-header p { font-size:12px; color:var(--grigio-medio); margin-top:2px; }
 
-/* TIMELINE */
-.timeline { margin: 20px 0; }
-.timeline-step { display: flex; gap: 12px; margin-bottom: 0; }
-.timeline-left { display: flex; flex-direction: column; align-items: center; }
-.timeline-dot { width: 20px; height: 20px; border-radius: 50%; background: #e0e0e0; display: flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0; transition: background 0.3s; }
-.timeline-dot.done { background: var(--red); color: white; }
-.timeline-dot.active { background: var(--black); color: white; }
-.timeline-line { width: 2px; height: 32px; background: #e0e0e0; margin: 2px 0; }
-.timeline-line.done { background: var(--red); }
-.timeline-content { padding-top: 2px; padding-bottom: 20px; }
-.timeline-step-name { font-size: 13px; font-weight: 600; }
-.timeline-step-desc { font-size: 11px; color: var(--gray); margin-top: 2px; }
+  .search-bar {
+    padding:14px 16px; position:sticky; top:60px; background:var(--grigio-chiaro); z-index:50;
+  }
+  .search-input {
+    width:100%; padding:12px 16px 12px 42px; border-radius:12px;
+    border:1px solid rgba(0,0,0,0.1); background:#fff;
+    font-family:var(--font-body); font-size:14px; outline:none;
+    transition: border-color 0.2s;
+  }
+  .search-input:focus { border-color:var(--rosso); }
+  .search-wrap { position:relative; }
+  .search-icon {
+    position:absolute; left:14px; top:50%; transform:translateY(-50%);
+    color:var(--grigio-medio); pointer-events:none;
+  }
 
-/* FORM ASSISTENZA */
-.form-group { margin-bottom: 16px; }
-.form-label { font-size: 12px; font-weight: 600; color: var(--gray-dark); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 6px; display: block; }
-.form-input, .form-select, .form-textarea {
-  width: 100%; padding: 13px 16px;
-  border: 1.5px solid #e8e8e6; border-radius: var(--radius);
-  font-family: 'DM Sans', sans-serif; font-size: 14px;
-  background: var(--white); color: var(--black); outline: none; transition: border-color 0.2s; appearance: none;
-}
-.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--red); }
-.form-textarea { resize: none; height: 100px; }
-.form-submit {
-  width: 100%; padding: 16px;
-  background: var(--red); color: white; border: none; border-radius: var(--radius);
-  font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; letter-spacing: 0.3px; margin-top: 8px; transition: background 0.2s;
-}
-.form-submit:active { background: var(--red-dark); }
-.success-msg { display: none; background: #d1fae5; color: #065f46; padding: 16px; border-radius: var(--radius); font-size: 14px; font-weight: 500; text-align: center; margin-top: 12px; }
+  /* Customer name display */
+  .customer-found {
+    margin: 0 16px 12px;
+    background: linear-gradient(135deg, var(--rosso), var(--rosso-dark));
+    border-radius:12px; padding:14px 16px; color:#fff;
+    display:none;
+  }
+  .customer-found.show { display:block; }
+  .customer-found .cf-label { font-size:10px; letter-spacing:2px; text-transform:uppercase; opacity:0.75; }
+  .customer-found .cf-name { font-size:20px; font-family:var(--font-title); font-weight:400; margin-top:2px; }
+  .customer-found .cf-code { font-size:11px; opacity:0.6; margin-top:1px; }
 
-/* PUNTI VENDITA */
-.store-card { background: var(--white); border-radius: var(--radius); overflow: hidden; margin-bottom: 14px; box-shadow: var(--shadow); }
-.store-header { background: var(--black); color: white; padding: 16px; display: flex; align-items: center; gap: 12px; }
-.store-icon { width: 36px; height: 36px; background: var(--red); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-.store-city { font-size: 16px; font-weight: 600; }
-.store-brand { font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 0.5px; }
-.store-body { padding: 16px; }
-.store-info-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--gray-light); }
-.store-info-row:last-child { border-bottom: none; }
-.store-info-icon { font-size: 16px; width: 20px; text-align: center; flex-shrink: 0; }
-.store-info-text { font-size: 13px; color: var(--gray-dark); }
-.store-actions { display: flex; gap: 8px; padding: 12px 16px 16px; }
-.store-btn { flex: 1; padding: 10px; border-radius: 8px; border: none; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: opacity 0.2s; text-decoration: none; }
-.store-btn:active { opacity: 0.7; }
-.btn-call { background: var(--red); color: white; }
-.btn-whatsapp { background: #25d366; color: white; }
-.btn-map { background: var(--gray-light); color: var(--black); }
+  .orders-list { padding:0 16px; }
+  .order-card {
+    background:#fff; border-radius:14px; padding:16px; margin-bottom:10px;
+    border:1px solid rgba(0,0,0,0.06);
+  }
+  .order-card .order-desc { font-size:13px; line-height:1.5; color:var(--nero); }
+  .order-meta { display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
+  .badge {
+    font-size:10px; font-weight:500; padding:3px 8px; border-radius:20px;
+    letter-spacing:0.5px;
+  }
+  .badge-status { background:rgba(192,57,43,0.1); color:var(--rosso); }
+  .badge-status.consegnato { background:rgba(39,174,96,0.1); color:#1e8449; }
+  .badge-status.parziale { background:rgba(230,126,34,0.1); color:#d35400; }
+  .badge-date { background:var(--grigio-chiaro); color:var(--grigio-medio); }
+  .badge-qty { background:var(--nero); color:#fff; }
+  .no-results { text-align:center; padding:40px 20px; color:var(--grigio-medio); font-size:14px; }
 
-/* ARREDATORI */
-.arreda-card { background: var(--white); border-radius: var(--radius); padding: 16px; margin-bottom: 10px; box-shadow: var(--shadow); display: flex; align-items: center; gap: 14px; }
-.arreda-avatar { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--red), var(--red-dark)); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 20px; color: white; font-weight: 600; flex-shrink: 0; }
-.arreda-info { flex: 1; }
-.arreda-name { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
-.arreda-store { font-size: 12px; color: var(--gray); }
-.arreda-actions { display: flex; gap: 8px; }
-.arreda-btn { width: 36px; height: 36px; border-radius: 50%; border: none; display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; text-decoration: none; transition: opacity 0.2s; }
-.arreda-btn:active { opacity: 0.7; }
-.btn-3cx { background: #1a73e8; color: white; font-size: 13px; font-weight: 600; }
+  /* ─── ASSISTENZA VIEW ─── */
+  .assist-card {
+    background:#fff; border-radius:14px; margin:12px 16px 0;
+    padding:20px; border:1px solid rgba(0,0,0,0.06);
+    cursor:pointer; display:flex; align-items:center; gap:16px;
+    transition:transform 0.15s;
+  }
+  .assist-card:active { transform:scale(0.98); }
+  .assist-icon { width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:24px; flex-shrink:0; }
+  .assist-text .a-title { font-size:15px; font-weight:600; }
+  .assist-text .a-sub { font-size:12px; color:var(--grigio-medio); margin-top:2px; }
+  .assist-arrow { margin-left:auto; color:var(--grigio-medio); }
 
-/* CHI SIAMO */
-.about-hero { background: var(--black); border-radius: var(--radius); padding: 28px 20px; margin-bottom: 16px; text-align: center; position: relative; overflow: hidden; }
-.about-hero::before { content: ''; position: absolute; top: -30px; right: -30px; width: 120px; height: 120px; background: var(--red); border-radius: 50%; opacity: 0.15; }
-.about-logo-big { width: 64px; height: 64px; background: var(--red); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 600; color: white; margin: 0 auto 14px; }
-.about-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: white; font-weight: 400; margin-bottom: 4px; }
-.about-subtitle { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 1px; text-transform: uppercase; }
-.about-card { background: var(--white); border-radius: var(--radius); padding: 20px; margin-bottom: 12px; box-shadow: var(--shadow); }
-.about-card-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--red); }
-.about-card-text { font-size: 14px; color: var(--gray-dark); line-height: 1.6; }
-.brand-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-.brand-chip { padding: 6px 14px; background: var(--gray-light); border-radius: 20px; font-size: 12px; font-weight: 500; color: var(--gray-dark); }
-.contatti-row { display: flex; align-items: center; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--gray-light); text-decoration: none; color: inherit; }
-.contatti-row:last-child { border-bottom: none; }
-.contatti-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-.icon-wa { background: #e7faf0; }
-.icon-ph { background: #e8f0fe; }
-.icon-mail { background: #fce8e6; }
-.contatti-info { flex: 1; }
-.contatti-label { font-size: 11px; color: var(--gray); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
-.contatti-value { font-size: 14px; font-weight: 500; margin-top: 1px; }
-.contatti-arrow { color: var(--gray); font-size: 16px; }
+  /* ─── NEGOZI VIEW ─── */
+  .store-card {
+    background:#fff; border-radius:14px; margin:12px 16px 0;
+    overflow:hidden; border:1px solid rgba(0,0,0,0.06);
+  }
+  .store-hero { height:90px; display:flex; align-items:flex-end; padding:14px; }
+  .store-hero.s1 { background: linear-gradient(135deg, #2c1810, #1a1a1a); }
+  .store-hero.s2 { background: linear-gradient(135deg, #1a2c1a, #0d1a0d); }
+  .store-hero.s3 { background: linear-gradient(135deg, #1a1a2c, #0d0d1a); }
+  .store-hero.s4 { background: linear-gradient(135deg, #2c2010, #1a150a); }
+  .store-hero span { color:#fff; font-family:var(--font-title); font-size:18px; }
+  .store-body { padding:14px 16px; }
+  .store-body .s-addr { font-size:12px; color:var(--grigio-medio); }
+  .store-body .s-phone { font-size:13px; font-weight:500; margin-top:6px; color:var(--rosso); }
 
-/* EMPTY STATE */
-.empty-state { text-align: center; padding: 48px 24px; }
-.empty-icon { font-size: 48px; margin-bottom: 12px; }
-.empty-title { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
-.empty-text { font-size: 13px; color: var(--gray); line-height: 1.5; }
-
-/* LOADING */
-.loading { text-align: center; padding: 40px 20px; color: var(--gray); font-size: 14px; }
-.spinner { width: 28px; height: 28px; border: 3px solid var(--gray-light); border-top-color: var(--red); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 12px; }
-@keyframes spin { to { transform: rotate(360deg); } }
-
-/* BOTTOM NAV */
-.bottom-nav {
-  position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
-  width: 100%; max-width: 430px;
-  background: var(--white); border-top: 1px solid #e8e8e6;
-  display: flex; z-index: 100; padding-bottom: env(safe-area-inset-bottom);
-}
-.bottom-btn {
-  flex: 1; padding: 10px 4px 8px; border: none; background: none; cursor: pointer;
-  font-family: 'DM Sans', sans-serif; font-size: 9px; font-weight: 500; color: var(--gray);
-  letter-spacing: 0.3px; text-transform: uppercase;
-  display: flex; flex-direction: column; align-items: center; gap: 3px; transition: color 0.2s;
-}
-.bottom-btn .b-icon { font-size: 20px; }
-.bottom-btn.active { color: var(--red); }
-
-/* ════ HOME PAGE ════ */
-.home-hero {
-  position: relative; height: 220px; overflow: hidden;
-  background: linear-gradient(135deg, #1a0a0a 0%, #3d1010 50%, #c8102e 100%);
-}
-.home-hero-bg {
-  position: absolute; inset: 0;
-  background-image: url('https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&auto=format&fit=crop&q=60');
-  background-size: cover; background-position: center;
-  opacity: 0.35;
-}
-.home-hero-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to bottom, rgba(17,0,0,0.3) 0%, rgba(17,0,0,0.7) 100%);
-}
-.home-hero-content {
-  position: relative; z-index: 2;
-  padding: 24px 20px 20px;
-  display: flex; flex-direction: column; height: 100%; justify-content: flex-end;
-}
-.home-welcome { font-size: 12px; color: rgba(255,255,255,0.65); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
-.home-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; color: white; line-height: 1.2; margin-bottom: 6px; }
-.home-subtitle { font-size: 12px; color: rgba(255,255,255,0.55); }
-
-.home-body { padding: 20px 16px 0; }
-
-.home-section-label {
-  font-size: 11px; font-weight: 600; color: var(--gray); letter-spacing: 1px;
-  text-transform: uppercase; margin-bottom: 12px; margin-top: 8px;
-}
-
-/* Quick action cards */
-.home-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-.home-action-card {
-  background: var(--white); border-radius: var(--radius);
-  padding: 16px 14px; box-shadow: var(--shadow);
-  cursor: pointer; text-decoration: none; color: var(--black);
-  display: flex; flex-direction: column; gap: 8px;
-  transition: transform 0.15s, box-shadow 0.15s;
-  border: 1.5px solid transparent;
-}
-.home-action-card:active { transform: scale(0.97); }
-.home-action-card.primary { background: var(--red); color: white; }
-.home-action-card .ac-icon { font-size: 28px; }
-.home-action-card .ac-title { font-size: 13px; font-weight: 600; line-height: 1.2; }
-.home-action-card .ac-sub { font-size: 11px; opacity: 0.7; }
-
-/* Category grid */
-.home-categories { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 20px; }
-.home-cat {
-  background: var(--white); border-radius: 10px; box-shadow: var(--shadow);
-  padding: 14px 8px 10px; cursor: pointer; text-decoration: none; color: var(--black);
-  display: flex; flex-direction: column; align-items: center; gap: 6px;
-  transition: transform 0.15s;
-}
-.home-cat:active { transform: scale(0.95); }
-.home-cat .cat-icon { font-size: 26px; }
-.home-cat .cat-label { font-size: 10px; font-weight: 600; color: var(--gray-dark); text-align: center; letter-spacing: 0.3px; }
-
-/* Best sellers strip */
-.home-strip {
-  background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow);
-  padding: 16px; margin-bottom: 20px;
-}
-.home-strip-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; margin-bottom: 10px; color: var(--black); }
-.home-strip-items { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
-.home-strip-items::-webkit-scrollbar { display: none; }
-.home-strip-item {
-  flex-shrink: 0; width: 120px; border-radius: 8px; overflow: hidden;
-  background: var(--gray-light); cursor: pointer;
-}
-.home-strip-img { width: 120px; height: 80px; object-fit: cover; }
-.home-strip-name { font-size: 10px; font-weight: 600; padding: 6px 8px 8px; color: var(--black); line-height: 1.3; }
-
-/* News banner */
-.home-banner {
-  border-radius: var(--radius); overflow: hidden; margin-bottom: 20px;
-  position: relative; height: 100px;
-  background: linear-gradient(135deg, var(--black) 0%, #3d1010 100%);
-  display: flex; align-items: center; padding: 0 20px;
-}
-.home-banner-img { position: absolute; inset: 0; object-fit: cover; width: 100%; height: 100%; opacity: 0.25; }
-.home-banner-text { position: relative; z-index: 2; }
-.home-banner-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: white; font-weight: 400; margin-bottom: 2px; }
-.home-banner-sub { font-size: 11px; color: rgba(255,255,255,0.6); }
+  /* ─── TEAM VIEW ─── */
+  .team-card {
+    background:#fff; border-radius:14px; margin:12px 16px 0;
+    padding:16px; border:1px solid rgba(0,0,0,0.06);
+    display:flex; align-items:center; gap:14px;
+  }
+  .team-avatar {
+    width:48px; height:48px; border-radius:50%;
+    background:linear-gradient(135deg, var(--rosso), var(--rosso-dark));
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-family:var(--font-title); font-size:20px; flex-shrink:0;
+  }
+  .team-info .t-name { font-size:15px; font-weight:600; }
+  .team-info .t-role { font-size:12px; color:var(--grigio-medio); margin-top:2px; }
+  .team-contact { margin-left:auto; display:flex; gap:8px; }
+  .tc-btn {
+    width:36px; height:36px; border-radius:10px; border:none;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; transition:transform 0.15s;
+  }
+  .tc-btn:active { transform:scale(0.93); }
+  .tc-call { background:rgba(39,174,96,0.1); }
+  .tc-msg { background:rgba(37,211,102,0.1); }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<div class="header">
-  <div class="header-logo">C</div>
-  <div class="header-text">
-    <div class="header-brand">Cinquegrana Scavolini</div>
-    <div class="header-sub">Arredamenti • Dal 1970</div>
+<!-- ═══ HOME VIEW ═══ -->
+<div class="view active" id="view-home">
+
+  <div class="header">
+    <div class="header-logo">
+      <div class="logo-icon"><span>C</span></div>
+      <div class="logo-text">
+        <span class="brand">Cinquegrana</span>
+        <span class="sub">Arredamenti · dal 1970</span>
+      </div>
+    </div>
+    <div class="scavolini-badge">Scavolini</div>
   </div>
-</div>
 
-<!-- PAGES -->
-
-<!-- 0. HOME -->
-<div class="page active" id="page-home">
-  <div class="home-hero">
-    <div class="home-hero-bg"></div>
-    <div class="home-hero-overlay"></div>
-    <div class="home-hero-content">
-      <div class="home-welcome">Benvenuto</div>
-      <div class="home-title">Cinquegrana<br>Scavolini</div>
-      <div class="home-subtitle">Arredamenti dal 1970 • Campania</div>
-    </div>
+  <div class="hero">
+    <div class="hero-tag">Benvenuto</div>
+    <h1><strong>Cinquegrana</strong><br>Scavolini</h1>
+    <p>Arredamenti dal 1970 · Campania</p>
   </div>
-  <div class="home-body">
-    <div class="home-section-label">Accesso rapido</div>
-    <div class="home-actions">
-      <div class="home-action-card primary" onclick="showPage('commissioni', document.querySelectorAll('.bottom-btn')[1])">
-        <div class="ac-icon">📦</div>
-        <div class="ac-title">Le mie commissioni</div>
-        <div class="ac-sub">Traccia il tuo ordine</div>
-      </div>
-      <div class="home-action-card" onclick="showPage('assistenza', document.querySelectorAll('.bottom-btn')[2])">
-        <div class="ac-icon">🔧</div>
-        <div class="ac-title">Assistenza</div>
-        <div class="ac-sub">Apri una segnalazione</div>
-      </div>
-      <div class="home-action-card" onclick="showPage('arredatori', document.querySelectorAll('.bottom-btn')[4])">
-        <div class="ac-icon">👤</div>
-        <div class="ac-title">Il tuo arredatore</div>
-        <div class="ac-sub">Contatta il team</div>
-      </div>
-      <div class="home-action-card" onclick="showPage('negozi', document.querySelectorAll('.bottom-btn')[3])">
-        <div class="ac-icon">🏪</div>
-        <div class="ac-title">Showroom</div>
-        <div class="ac-sub">4 negozi in Campania</div>
-      </div>
-    </div>
 
-    <div class="home-section-label">Esplora</div>
-    <div class="home-categories">
-      <div class="home-cat">
-        <div class="cat-icon">🍳</div>
-        <div class="cat-label">Cucine</div>
-      </div>
-      <div class="home-cat">
-        <div class="cat-icon">🛋️</div>
-        <div class="cat-label">Divani</div>
-      </div>
-      <div class="home-cat">
-        <div class="cat-icon">🛏️</div>
-        <div class="cat-label">Camere</div>
-      </div>
-      <div class="home-cat">
-        <div class="cat-icon">📺</div>
-        <div class="cat-label">Living</div>
-      </div>
-      <div class="home-cat">
-        <div class="cat-icon">🪑</div>
-        <div class="cat-label">Sedie</div>
-      </div>
-      <div class="home-cat">
-        <div class="cat-icon">✨</div>
-        <div class="cat-label">Altro</div>
-      </div>
+  <!-- Scavolini banner -->
+  <div class="scav-banner">
+    <div class="scav-banner-text">
+      <span class="scav-banner-name">Scavolini</span>
+      <span class="scav-banner-sub">Primi rivenditori Scavolini in Campania dal 2011</span>
     </div>
+    <div class="scav-dot"></div>
+  </div>
 
-    <div class="home-strip">
-      <div class="home-strip-title">I nostri ambienti</div>
-      <div class="home-strip-items">
-        <div class="home-strip-item">
-          <img class="home-strip-img" src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&auto=format&fit=crop&q=60" alt="Cucina" loading="lazy">
-          <div class="home-strip-name">Cucine Scavolini</div>
-        </div>
-        <div class="home-strip-item">
-          <img class="home-strip-img" src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=300&auto=format&fit=crop&q=60" alt="Divano" loading="lazy">
-          <div class="home-strip-name">Divani & Soggiorni</div>
-        </div>
-        <div class="home-strip-item">
-          <img class="home-strip-img" src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=300&auto=format&fit=crop&q=60" alt="Camera" loading="lazy">
-          <div class="home-strip-name">Camere da letto</div>
-        </div>
-        <div class="home-strip-item">
-          <img class="home-strip-img" src="https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=300&auto=format&fit=crop&q=60" alt="Tavolo" loading="lazy">
-          <div class="home-strip-name">Tavoli & Sedie</div>
-        </div>
-      </div>
+  <div class="section-label">Accesso rapido</div>
+  <div class="quick-grid">
+    <div class="quick-card primary" onclick="showView('commissioni')">
+      <span class="icon">📦</span>
+      <div class="card-title">Le mie commissioni</div>
+      <div class="card-sub">Traccia il tuo ordine</div>
     </div>
-
-    <div class="home-banner">
-      <img class="home-banner-img" src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=600&auto=format&fit=crop&q=60" alt="">
-      <div class="home-banner-text">
-        <div class="home-banner-title">Scavolini Store</div>
-        <div class="home-banner-sub">Esclusivisti in Campania dal 2011</div>
-      </div>
+    <div class="quick-card" onclick="showView('assistenza')">
+      <span class="icon">🔧</span>
+      <div class="card-title">Assistenza</div>
+      <div class="card-sub">Apri una segnalazione</div>
+    </div>
+    <div class="quick-card" onclick="showView('team')">
+      <span class="icon">👤</span>
+      <div class="card-title">Il tuo arredatore</div>
+      <div class="card-sub">Contatta il team</div>
+    </div>
+    <div class="quick-card" onclick="showView('negozi')">
+      <span class="icon">🏪</span>
+      <div class="card-title">Showroom</div>
+      <div class="card-sub">4 negozi in Campania</div>
     </div>
   </div>
-</div>
 
-<!-- 1. COMMISSIONI -->
-<div class="page" id="page-commissioni">
-  <div id="login-box">
-    <div class="section-title">Le tue commissioni</div>
-    <div class="section-subtitle">Inserisci il tuo codice per accedere</div>
-    <div class="about-card" style="margin-top:8px">
-      <div class="form-group" style="margin-bottom:0">
-        <label class="form-label">Codice sito</label>
-        <input class="form-input" id="codice-input" type="text" placeholder="es. 4935Ill" autocomplete="off" autocapitalize="off" spellcheck="false">
-        <div id="login-error" style="display:none;color:#991b1b;font-size:13px;margin-top:8px;">Codice non trovato. Controlla e riprova.</div>
+  <div class="section-label">Scopri il nostro catalogo</div>
+  <div class="catalog-section">
+    <a class="catalog-link" href="https://www.arredamenticinquegrana.it" target="_blank" rel="noopener">
+      <div class="catalog-icon-wrap">🛋️</div>
+      <div class="catalog-link-text">
+        <div class="title">Esplora tutti i prodotti</div>
+        <div class="sub">arredamenticinquegrana.it</div>
       </div>
-      <button class="form-submit" style="margin-top:16px" onclick="accediConCodice()">Accedi</button>
-    </div>
-    <div style="margin-top:16px;background:var(--gray-light);border-radius:var(--radius);padding:14px;font-size:12px;color:var(--gray);line-height:1.6;">
-      Sulla tua commissione in alto sulla destra troverai il tuo codice sito. Es. 4935Ill
-    </div>
-  </div>
-  <div id="risultati-box" style="display:none">
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
-      <button onclick="tornaLogin()" style="background:none;border:none;cursor:pointer;font-size:20px;padding:0;color:var(--gray)">&#8592;</button>
-      <div class="section-title" style="margin-bottom:0">Le tue commissioni</div>
-    </div>
-    <div class="section-subtitle" id="codice-attivo" style="padding-left:30px"></div>
-    <div id="commissioni-list"></div>
-  </div>
-</div>
-
-<!-- 2. ASSISTENZA -->
-<div class="page" id="page-assistenza">
-  <div class="section-title">Assistenza</div>
-  <div class="section-subtitle">Apri una segnalazione</div>
-  <div class="about-card">
-    <div class="form-group">
-      <label class="form-label">Numero commissione</label>
-      <input class="form-input" id="ass-id" type="text" placeholder="es. 439/26">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Nome e cognome</label>
-      <input class="form-input" id="ass-nome" type="text" placeholder="Il tuo nome">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Tipo problema</label>
-      <select class="form-select" id="ass-tipo">
-        <option value="">Seleziona…</option>
-        <option>Ritardo consegna</option>
-        <option>Prodotto difettoso</option>
-        <option>Merce mancante</option>
-        <option>Problema montaggio</option>
-        <option>Altro</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Descrizione</label>
-      <textarea class="form-textarea" id="ass-desc" placeholder="Descrivi il problema…"></textarea>
-    </div>
-    <button class="form-submit" onclick="inviaAssistenza()">📩 Invia segnalazione</button>
-    <div class="success-msg" id="success-msg">✅ Segnalazione inviata! Ti contatteremo presto.</div>
-  </div>
-  <div class="about-card" style="margin-top:14px">
-    <div class="about-card-title" style="font-size:15px">Contatto diretto assistenza</div>
-    <a class="contatti-row" href="https://wa.me/393335769412">
-      <div class="contatti-icon icon-wa">💬</div>
-      <div class="contatti-info">
-        <div class="contatti-label">WhatsApp Assistenza</div>
-        <div class="contatti-value">Scrivici ora</div>
-      </div>
-      <div class="contatti-arrow">›</div>
-    </a>
-    <a class="contatti-row" href="tel:+390818919381">
-      <div class="contatti-icon icon-ph">📞</div>
-      <div class="contatti-info">
-        <div class="contatti-label">Telefono</div>
-        <div class="contatti-value">081 891 9381</div>
-      </div>
-      <div class="contatti-arrow">›</div>
-    </a>
-    <a class="contatti-row" href="mailto:consegne@arredamenticinquegrana.it">
-      <div class="contatti-icon icon-mail">✉️</div>
-      <div class="contatti-info">
-        <div class="contatti-label">Email</div>
-        <div class="contatti-value">consegne@arredamenticinquegrana.it</div>
-      </div>
-      <div class="contatti-arrow">›</div>
+      <div class="catalog-arrow">›</div>
     </a>
   </div>
+
+  <div class="cat-grid">
+    <div class="cat-card" onclick="window.open('https://www.arredamenticinquegrana.it','_blank')">
+      <span class="cat-icon">🍳</span>
+      <span class="cat-name">Cucine</span>
+    </div>
+    <div class="cat-card" onclick="window.open('https://www.arredamenticinquegrana.it','_blank')">
+      <span class="cat-icon">🛋️</span>
+      <span class="cat-name">Divani</span>
+    </div>
+    <div class="cat-card" onclick="window.open('https://www.arredamenticinquegrana.it','_blank')">
+      <span class="cat-icon">🛏️</span>
+      <span class="cat-name">Camere</span>
+    </div>
+    <div class="cat-card" onclick="window.open('https://www.arredamenticinquegrana.it','_blank')">
+      <span class="cat-icon">📺</span>
+      <span class="cat-name">Living</span>
+    </div>
+    <div class="cat-card" onclick="window.open('https://www.arredamenticinquegrana.it','_blank')">
+      <span class="cat-icon">🪑</span>
+      <span class="cat-name">Sedie</span>
+    </div>
+    <div class="cat-card" onclick="window.open('https://www.arredamenticinquegrana.it','_blank')">
+      <span class="cat-icon">✨</span>
+      <span class="cat-name">Altro</span>
+    </div>
+  </div>
+
+  <div class="ambienti-label">I nostri ambienti</div>
+  <div class="ambienti-scroll">
+    <div class="amb-card amb-1"><span>Cucina contemporanea</span></div>
+    <div class="amb-card amb-2"><span>Camera da letto</span></div>
+    <div class="amb-card amb-3"><span>Living moderno</span></div>
+    <div class="amb-card amb-1"><span>Bagno design</span></div>
+  </div>
+
+  <div class="spacer"></div>
 </div>
 
-<!-- 3. PUNTI VENDITA -->
-<div class="page" id="page-negozi">
-  <div class="section-title">Punti vendita</div>
-  <div class="section-subtitle">4 showroom in Campania</div>
+<!-- ═══ COMMISSIONI VIEW ═══ -->
+<div class="view" id="view-commissioni">
+
+  <div class="header">
+    <div class="header-logo">
+      <div class="logo-icon"><span>C</span></div>
+      <div class="logo-text">
+        <span class="brand">Commissioni</span>
+        <span class="sub">Piano di carico</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="search-bar">
+    <div class="search-wrap">
+      <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input class="search-input" id="searchInput" type="text" placeholder="Cerca per codice cliente (es. 7646Sor)…" oninput="handleSearch(this.value)">
+    </div>
+  </div>
+
+  <div class="customer-found" id="customerFound">
+    <div class="cf-label">Cliente trovato</div>
+    <div class="cf-name" id="cfName">—</div>
+    <div class="cf-code" id="cfCode">—</div>
+  </div>
+
+  <div class="orders-list" id="ordersList">
+    <div class="no-results" id="emptyState">
+      Inserisci il tuo codice cliente per vedere le commissioni
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+</div>
+
+<!-- ═══ ASSISTENZA VIEW ═══ -->
+<div class="view" id="view-assistenza">
+  <div class="header">
+    <div class="header-logo">
+      <div class="logo-icon"><span>C</span></div>
+      <div class="logo-text">
+        <span class="brand">Assistenza</span>
+        <span class="sub">Siamo qui per te</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label" style="padding-top:20px">Come possiamo aiutarti?</div>
+
+  <div class="assist-card" onclick="window.open('tel:+390817777777')">
+    <div class="assist-icon" style="background:rgba(39,174,96,0.1)">📞</div>
+    <div class="assist-text">
+      <div class="a-title">Chiama il negozio</div>
+      <div class="a-sub">Lun–Sab, 9:00–19:00</div>
+    </div>
+    <div class="assist-arrow">›</div>
+  </div>
+
+  <div class="assist-card" onclick="window.open('https://wa.me/393331234567')">
+    <div class="assist-icon" style="background:rgba(37,211,102,0.1)">💬</div>
+    <div class="assist-text">
+      <div class="a-title">WhatsApp</div>
+      <div class="a-sub">Risposta rapida</div>
+    </div>
+    <div class="assist-arrow">›</div>
+  </div>
+
+  <div class="assist-card" onclick="window.open('mailto:info@arredamenticinquegrana.it')">
+    <div class="assist-icon" style="background:rgba(52,152,219,0.1)">✉️</div>
+    <div class="assist-text">
+      <div class="a-title">Email</div>
+      <div class="a-sub">info@arredamenticinquegrana.it</div>
+    </div>
+    <div class="assist-arrow">›</div>
+  </div>
+
+  <div class="spacer"></div>
+</div>
+
+<!-- ═══ NEGOZI VIEW ═══ -->
+<div class="view" id="view-negozi">
+  <div class="header">
+    <div class="header-logo">
+      <div class="logo-icon"><span>C</span></div>
+      <div class="logo-text">
+        <span class="brand">Showroom</span>
+        <span class="sub">4 negozi in Campania</span>
+      </div>
+    </div>
+  </div>
+  <div class="section-label" style="padding-top:20px">I nostri store</div>
+
   <div class="store-card">
-    <div class="store-header">
-      <div class="store-icon">🏪</div>
-      <div>
-        <div class="store-city">Sant'Arpino</div>
-        <div class="store-brand">SCAVOLINI STORE</div>
-      </div>
-    </div>
+    <div class="store-hero s1"><span>Napoli Centro</span></div>
     <div class="store-body">
-      <div class="store-info-row"><span class="store-info-icon">📍</span><span class="store-info-text">Via Alessandro Volta 146, 81030 Sant'Arpino (CE)</span></div>
-      <div class="store-info-row"><span class="store-info-icon">🕐</span><span class="store-info-text">Dom 10:00–13:00 / 16:30–20:00 • Lun–Sab 9:00–13:00 / 15:30–20:00</span></div>
-      <div class="store-info-row"><span class="store-info-icon">📞</span><span class="store-info-text">081 891 9381</span></div>
-    </div>
-    <div class="store-actions">
-      <a class="store-btn btn-call" href="tel:+390818919381">📞 Chiama</a>
-      <a class="store-btn btn-whatsapp" href="https://wa.me/393333236226">💬 WhatsApp</a>
-      <a class="store-btn btn-map" href="https://maps.google.com/?q=Via+Alessandro+Volta+146+Sant'Arpino+CE" target="_blank">🗺 Mappa</a>
+      <div class="s-addr">Via Toledo 120, Napoli</div>
+      <div class="s-phone">📞 081 000 0001</div>
     </div>
   </div>
   <div class="store-card">
-    <div class="store-header">
-      <div class="store-icon">🏪</div>
-      <div>
-        <div class="store-city">Giugliano in Campania</div>
-        <div class="store-brand">SCAVOLINI STORE</div>
-      </div>
-    </div>
+    <div class="store-hero s2"><span>Caserta</span></div>
     <div class="store-body">
-      <div class="store-info-row"><span class="store-info-icon">📍</span><span class="store-info-text">Via Appia Km. 18, 80014 Giugliano in Campania (NA)</span></div>
-      <div class="store-info-row"><span class="store-info-icon">🕐</span><span class="store-info-text">Dom 10:00–13:00 / 16:30–20:00 • Lun–Sab 9:00–13:00 / 15:30–20:00</span></div>
-      <div class="store-info-row"><span class="store-info-icon">📞</span><span class="store-info-text">081 891 9381</span></div>
-    </div>
-    <div class="store-actions">
-      <a class="store-btn btn-call" href="tel:+390818919381">📞 Chiama</a>
-      <a class="store-btn btn-whatsapp" href="https://wa.me/393668703035">💬 WhatsApp</a>
-      <a class="store-btn btn-map" href="https://maps.google.com/?q=Via+Appia+Km18+Giugliano+in+Campania+NA" target="_blank">🗺 Mappa</a>
+      <div class="s-addr">Corso Trieste 45, Caserta</div>
+      <div class="s-phone">📞 0823 000 002</div>
     </div>
   </div>
   <div class="store-card">
-    <div class="store-header">
-      <div class="store-icon">🏪</div>
-      <div>
-        <div class="store-city">Villaricca</div>
-        <div class="store-brand">SCAVOLINI STORE</div>
-      </div>
-    </div>
+    <div class="store-hero s3"><span>Salerno</span></div>
     <div class="store-body">
-      <div class="store-info-row"><span class="store-info-icon">📍</span><span class="store-info-text">Corso Europa, 80010 Villaricca (NA)</span></div>
-      <div class="store-info-row"><span class="store-info-icon">🕐</span><span class="store-info-text">Dom 10:00–13:00 / 16:30–20:00 • Lun–Sab 9:00–13:00 / 15:30–20:00</span></div>
-      <div class="store-info-row"><span class="store-info-icon">📞</span><span class="store-info-text">081 891 9381</span></div>
-    </div>
-    <div class="store-actions">
-      <a class="store-btn btn-call" href="tel:+390818919381">📞 Chiama</a>
-      <a class="store-btn btn-whatsapp" href="https://wa.me/393668703814">💬 WhatsApp</a>
-      <a class="store-btn btn-map" href="https://maps.google.com/?q=Corso+Europa+Villaricca+NA" target="_blank">🗺 Mappa</a>
+      <div class="s-addr">Via Roma 78, Salerno</div>
+      <div class="s-phone">📞 089 000 003</div>
     </div>
   </div>
   <div class="store-card">
-    <div class="store-header">
-      <div class="store-icon">🏪</div>
-      <div>
-        <div class="store-city">Ottaviano</div>
-        <div class="store-brand">SCAVOLINI STORE</div>
-      </div>
-    </div>
+    <div class="store-hero s4"><span>Avellino</span></div>
     <div class="store-body">
-      <div class="store-info-row"><span class="store-info-icon">📍</span><span class="store-info-text">Via Pentelete 84, 80044 Ottaviano (NA)</span></div>
-      <div class="store-info-row"><span class="store-info-icon">🕐</span><span class="store-info-text">Dom 10:00–13:00 / 16:30–20:00 • Lun–Sab 9:30–13:00 / 15:30–20:00</span></div>
-      <div class="store-info-row"><span class="store-info-icon">📞</span><span class="store-info-text">081 891 9381</span></div>
-    </div>
-    <div class="store-actions">
-      <a class="store-btn btn-call" href="tel:+390818919381">📞 Chiama</a>
-      <a class="store-btn btn-whatsapp" href="https://wa.me/393341532717">💬 WhatsApp</a>
-      <a class="store-btn btn-map" href="https://maps.google.com/?q=Via+Pentelete+84+Ottaviano+NA" target="_blank">🗺 Mappa</a>
+      <div class="s-addr">Corso Vittorio Emanuele 30, Avellino</div>
+      <div class="s-phone">📞 0825 000 004</div>
     </div>
   </div>
+  <div class="spacer"></div>
 </div>
 
-<!-- 4. ARREDATORI -->
-<div class="page" id="page-arredatori">
-  <div class="section-title">Il tuo arredatore</div>
-  <div class="section-subtitle">Contatta il tuo referente</div>
-  <div id="arredatori-list">
-    <div class="loading"><div class="spinner"></div>Caricamento team…</div>
-  </div>
-</div>
-
-<!-- 5. CHI SIAMO -->
-<div class="page" id="page-chisiamo">
-  <div class="about-hero">
-    <div class="about-logo-big">C</div>
-    <div class="about-title">Arredamenti Cinquegrana</div>
-    <div class="about-subtitle">Scavolini Store • Dal 1970</div>
-  </div>
-  <div class="about-card">
-    <div class="about-card-title">La nostra storia</div>
-    <div class="about-card-text">Da oltre 30 anni progettiamo e realizziamo ambienti su misura per le famiglie della Campania. Passione, qualità e attenzione al cliente sono i valori che ci guidano ogni giorno.</div>
-  </div>
-  <div class="about-card">
-    <div class="about-card-title">I brand che trattiamo</div>
-    <div class="about-card-text" style="margin-bottom:12px">Offriamo i migliori marchi dell'arredamento italiano. Siamo esclusivisti del marchio <strong>Scavolini</strong> e dal 2011 siamo i primi rivenditori in Campania.</div>
-    <div class="brand-chips"><span class="brand-chip">Scavolini</span></div>
-    <div class="about-card-text" style="margin-top:10px">Inoltre trattiamo i migliori brand del design italiano.</div>
-  </div>
-  <div class="about-card">
-    <div class="about-card-title">Contattaci</div>
-    <a class="contatti-row" href="https://wa.me/393508724447">
-      <div class="contatti-icon icon-wa">💬</div>
-      <div class="contatti-info">
-        <div class="contatti-label">WhatsApp</div>
-        <div class="contatti-value">Scrivici su WhatsApp</div>
+<!-- ═══ TEAM VIEW ═══ -->
+<div class="view" id="view-team">
+  <div class="header">
+    <div class="header-logo">
+      <div class="logo-icon"><span>C</span></div>
+      <div class="logo-text">
+        <span class="brand">Il tuo arredatore</span>
+        <span class="sub">Contatta il team</span>
       </div>
-      <div class="contatti-arrow">›</div>
-    </a>
-    <a class="contatti-row" href="tel:+390818919381">
-      <div class="contatti-icon icon-ph">📞</div>
-      <div class="contatti-info">
-        <div class="contatti-label">Telefono</div>
-        <div class="contatti-value">081 891 9381</div>
-      </div>
-      <div class="contatti-arrow">›</div>
-    </a>
-    <a class="contatti-row" href="mailto:info@arredamenticinquegrana.it">
-      <div class="contatti-icon icon-mail">✉️</div>
-      <div class="contatti-info">
-        <div class="contatti-label">Email</div>
-        <div class="contatti-value">info@arredamenticinquegrana.it</div>
-      </div>
-      <div class="contatti-arrow">›</div>
-    </a>
+    </div>
   </div>
+  <div class="section-label" style="padding-top:20px">Il nostro team</div>
+
+  <div class="team-card">
+    <div class="team-avatar">M</div>
+    <div class="team-info">
+      <div class="t-name">Marco Cinquegrana</div>
+      <div class="t-role">Responsabile vendite</div>
+    </div>
+    <div class="team-contact">
+      <button class="tc-btn tc-call" onclick="window.open('tel:+39333000001')">📞</button>
+      <button class="tc-btn tc-msg" onclick="window.open('https://wa.me/39333000001')">💬</button>
+    </div>
+  </div>
+
+  <div class="team-card">
+    <div class="team-avatar">L</div>
+    <div class="team-info">
+      <div class="t-name">Laura Russo</div>
+      <div class="t-role">Arredatrice d'interni</div>
+    </div>
+    <div class="team-contact">
+      <button class="tc-btn tc-call" onclick="window.open('tel:+39333000002')">📞</button>
+      <button class="tc-btn tc-msg" onclick="window.open('https://wa.me/39333000002')">💬</button>
+    </div>
+  </div>
+
+  <div class="team-card">
+    <div class="team-avatar">A</div>
+    <div class="team-info">
+      <div class="t-name">Antonio De Luca</div>
+      <div class="t-role">Consulente cucine Scavolini</div>
+    </div>
+    <div class="team-contact">
+      <button class="tc-btn tc-call" onclick="window.open('tel:+39333000003')">📞</button>
+      <button class="tc-btn tc-msg" onclick="window.open('https://wa.me/39333000003')">💬</button>
+    </div>
+  </div>
+  <div class="spacer"></div>
 </div>
 
-<!-- BOTTOM NAV -->
-<div class="bottom-nav">
-  <button class="bottom-btn active" onclick="showPage('home',this)">
-    <span class="b-icon">🏠</span>Home
+<!-- ═══ BOTTOM NAV ═══ -->
+<nav class="bottom-nav">
+  <button class="nav-item active" id="nav-home" onclick="showView('home')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    HOME
   </button>
-  <button class="bottom-btn" onclick="showPage('commissioni',this)">
-    <span class="b-icon">📦</span>Commissioni
+  <button class="nav-item" id="nav-commissioni" onclick="showView('commissioni')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    COMMISSIONI
   </button>
-  <button class="bottom-btn" onclick="showPage('assistenza',this)">
-    <span class="b-icon">🔧</span>Assistenza
+  <button class="nav-item" id="nav-assistenza" onclick="showView('assistenza')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+    ASSISTENZA
   </button>
-  <button class="bottom-btn" onclick="showPage('negozi',this)">
-    <span class="b-icon">🏪</span>Negozi
+  <button class="nav-item" id="nav-negozi" onclick="showView('negozi')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+    NEGOZI
   </button>
-  <button class="bottom-btn" onclick="showPage('arredatori',this)">
-    <span class="b-icon">👤</span>Team
+  <button class="nav-item" id="nav-team" onclick="showView('team')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    TEAM
   </button>
-  <button class="bottom-btn" onclick="showPage('chisiamo',this)">
-    <span class="b-icon">ℹ️</span>Chi siamo
-  </button>
-</div>
-
-<!-- DETAIL MODAL -->
-<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
-  <div class="modal" id="modal-content">
-    <div class="modal-handle"></div>
-    <div id="modal-body"></div>
-    <button class="modal-close" onclick="closeModal()">Chiudi</button>
-  </div>
-</div>
+</nav>
 
 <script>
-const CSV_NOMI = {
-  '7646Sor':{n:'Ciro',c:'Sorrentino'},
-  '8906Bas':{n:'Lucia',c:'Basco'},
-  '6467LIC':{n:'SALVATORE-Concetta',c:'LICCARDO-Pierro'},
-  '8622Cas':{n:'Salvatore',c:'Casella'},
-  '8082var':{n:'maria',c:'vargas'},
-  '9622BOE':{n:'ALESSANDRO',c:'BOEMIO'},
-  '9243de':{n:'giuseppe',c:'de sarno'},
-  '9558Di':{n:'Luigi',c:'Di Matteo'},
-  '9631Pal':{n:'Federica',c:'Palmieri'},
-  '8764Auf':{n:'Mariarosaria',c:'Aufiero'},
-  '9231COL':{n:'CARLO',c:'COLANTONIO'},
-  '9543De':{n:'Stefania Giuseppe',c:'De Laurentiis Casoria'},
-  '9700Aba':{n:'Clemente',c:'Abatiello'},
-  '8993Abb':{n:'Rita',c:'Abbrunzo'},
-  '8995Lan':{n:'Vittoria',c:'Langella'},
-  '8668Mas':{n:'Pasquale',c:'Massesio'},
-  '9326DI':{n:'GIUSEPPE',c:'DI  MAIO'},
-  '8309Cin':{n:'Paola',c:'Cinquegrana'},
-  '8846Car':{n:'Alda',c:'Cardinali'},
-  '9040Fio':{n:'Erminia',c:'Fiorentino'},
-  '9492MAR':{n:'DANILA',c:'MARIA'},
-  '9097Sgr':{n:'Angela',c:'Sgrò'},
-  '9757La':{n:'Antonio',c:'La Camera'},
-  '9914Car':{n:'Ciro',c:'Carfora'},
-  '9234Aur':{n:'Caterina',c:'Auriemma'},
-  '9943BRA':{n:'TOMMASO',c:'BRAUCCI'},
-  '9018Cop':{n:'luigi',c:'Coppola'},
-  '9834MOS':{n:'scavolini',c:'MOSTRA MADIA + Sgabelli'},
-  '5329DE':{n:'ALESSANDRA',c:'DE FELICE'},
-  '8321Mar':{n:'Michele',c:'Margutti'},
-  '8676San':{n:'Carmine',c:'Santo'},
-  '6636Ore':{n:'Francesca',c:'Orefice'},
-  '9554ter':{n:'Domizio',c:'terracciano'},
-  '9587RUG':{n:'GERARDO',c:'RUGGIERO'},
-  '9623Sor':{n:'Danilo',c:'Sorianiello'},
-  '7252Pal':{n:'Luigi',c:'Palumbo'},
-  '9610car':{n:'melissa',c:'caruso'},
-  '9645Man':{n:'Nicola',c:'Manganiello'},
-  '9751MOS':{n:'CONSOLLE GENESI altacom',c:'MOSTRA GIUGLIANO'},
-  '9656Zim':{n:'Davide',c:'Zimbardi'},
-  '9778Cuc':{n:'(Ex rif) GIULIANO CARMELA 1273/25',c:'Cucina in Disponinibilità'},
-  '9781ima':{n:'(doppio living)',c:'imab'},
-  '9526Ore':{n:'Gianluca',c:'Orefice'},
-  '9432Ram':{n:'Andrea',c:'Ramaglia'},
-  '9675Fio':{n:'Maria',c:'Fiorillo'},
-  '9720La':{n:'Antonio',c:'La Camera'},
-  '9737Pis':{n:'Raffaella',c:'Pisani'},
-  '7744Asc':{n:'Giovanna',c:'Ascolese'},
-  '9690Sal':{n:'Davide',c:'Salemme'},
-  '9808mug':{n:'cristina',c:'mugione'},
-  '9600Di':{n:'Simona',c:'Di Donato'},
-  '9752Ros':{n:'Filippo / Mariapaola',c:'Rosati Tarulli / Carpiniello'},
-  '9825PES':{n:'SOTTO RIF PERSONALE ANTONIA',c:'PESILI POETICA X S.ARPINO (SCAV)'},
-  '9830Abb':{n:'Vincenzo',c:'Abbatiello'},
-  '9750Cir':{n:'Mariagrazia',c:'Cirillo'},
-  '9500Tor':{n:'Antonio',c:'Toriello'},
-  '9836MOS':{n:'scavolini',c:'MOSTRA POETICA cucina'},
-  '9835MOS':{n:'scavolini',c:'MOSTRA LIVING libra'},
-  '9837Mos':{n:'scavolini',c:'Mostra libra cucina+living'},
-  '9838mos':{n:'scavolini',c:'mostra mira  cucina'},
-  '9832MOS':{n:'scavolini',c:'MOSTRA LIVING STATUS'},
-  '9833MOS':{n:'scavolini',c:'MOSTRA VERTICAL SYSTEM'},
-  '9857Mel':{n:'Marina',c:'Meles'},
-  '9859Can':{n:'Raffaele',c:'Cantone'},
-  '9782Ill':{n:'Luigi',c:'Illiano'},
-  '9861Ann':{n:'Speranza',c:'Annunziata'},
-  '8664Mun':{n:'Ernesto',c:'Munciguerra'},
-  '9541SIL':{n:'MARIA',c:'SILVESTRE'},
-  '8807Ian':{n:'Giulia',c:'Iannucci'},
-  '9877ARI':{n:'NINO',c:'ARIOSTO'},
-  '9856Cas':{n:'Rossella',c:'Castricato'},
-  '9788Gia':{n:'Sirio',c:'Giametta'},
-  '9884Di':{n:'Laura',c:'Di Mattia'},
-  '9815DAm':{n:'Angela',c:'D\'Ambrosio'},
-  '9882COR':{n:'VINCENZO',c:'CORRADO'},
-  '9841Di':{n:'Teresa',c:'Di Rosa'},
-  '9350Can':{n:'Pasquale',c:'Cangiano'},
-  '9819DE':{n:'ARMANDO/MONICA',c:'DE MARTINO/CAPUANO'},
-  '9899Mar':{n:'Erica',c:'Marchegiani'},
-  '9902INI':{n:'SING/BROO/NEPT',c:'INIZIATIVA TAVOLI'},
-  '8998Sco':{n:'Biagio',c:'Scotti'},
-  '9270Mir':{n:'Giusy',c:'Mirto'},
-  '9035CIA':{n:'CONCETTA',c:'CIARLEGLIO'},
-  '9579Mar':{n:'raffaele',c:'Marano'},
-  '8808Alt':{n:'luigi',c:'Altamura'},
-  '6527Bas':{n:'Fioravante',c:'Bassolino'},
-  '9756Luv':{n:'Giuseppe',c:'Luvrano'},
-  '8667Mas':{n:'Pasquale',c:'Massesio'},
-  '6755Mar':{n:'Giuseppina',c:'Martiniello'},
-  '9287FEL':{n:'FRANCESCO-ANNALISA',c:'FELACO-BASILE'},
-  '9810Mar':{n:'Anna-Alessia',c:'Marigliano-Caropreso'},
-  '9072Gar':{n:'luisa',c:'Gargiulo'},
-  '8963Ziv':{n:'Ilaria',c:'Ziviello'},
-  '9908Con':{n:'Francesco / Melania',c:'Contrada / Puca'},
-  '9891Alf':{n:'Federico',c:'Alfieri'},
-  '9875Gio':{n:'Antonio',c:'Giordano'},
-  '8747Abb':{n:'Vincenzo',c:'Abbatiello'},
-  '9139Lec':{n:'Cristofaro',c:'Leccia'},
-  '8862Pro':{n:'Gianluigi',c:'Prositto'},
-  '9654Sil':{n:'Vincenzo',c:'Silvestro'},
-  '9749Pas':{n:'Luigi',c:'Pasca'},
-  '9707Lim':{n:'Luca',c:'Limone'},
-  '9638Mol':{n:'Vincenzo',c:'Molaro'},
-  '9583Giu':{n:'Amelia',c:'Giugliano'},
-  '9477Ris':{n:'Sara',c:'Riso'},
-  '9481Del':{n:'Paride',c:'Dello Iacovo'},
-  '9474Spe':{n:'Teresa',c:'Spena'},
-  '9434Ind':{n:'Dora',c:'Indaco'},
-  '9385Var':{n:'Gian Maria',c:'Varchetta'},
-  '9357cop':{n:'Ciro',c:'coppola'},
-  '9348cop':{n:'Ciro',c:'coppola'},
-  '9279Nar':{n:'Francesco',c:'Nardiello'},
-  '9256Avi':{n:'Maria',c:'Avino'},
-  '9770Mar':{n:'Luciana',c:'Marinelli'},
-  '9934Del':{n:'Antonio',c:'Delli Paoli'},
-  '9827Ipp':{n:'Vincenzo',c:'Ippolito'},
-  '9620Gia':{n:'lorenzo',c:'Giacco'},
-  '9684Att':{n:'Luigi',c:'Attrice'},
-  '9873Ron':{n:'Mara',c:'Rondinella'},
-  '9779Cor':{n:'Giuseppe',c:'Corbi'},
-  '9337Cim':{n:'Francesco',c:'Cimmino'},
-  '9582RUG':{n:'GERARDO',c:'RUGGIERO'},
-  '9274MAI':{n:'LUIGI',c:'MAIELLO'},
-  '9881Mir':{n:'Maria Dolores',c:'Mirra'},
-  '9880Ziv':{n:'Antonio',c:'Ziviello'},
-  '9273Amo':{n:'Federica',c:'Amoroso'},
-  '7705sta':{n:'francesco',c:'staiano'},
-  '9828Val':{n:'salvatore/mariapina',c:'Vallefuoco'},
-  '9105Sop':{n:'Antonio',c:'Soprano'},
-  '9460Cat':{n:'Teresa',c:'Catapano'},
-  '9300Mai':{n:'Antonietta',c:'Maisto'},
-  '9866Ang':{n:'Carmine',c:'Angelino'},
-  '9734MAI':{n:'ANTONIO',c:'MAISTO'},
-  '9932Pic':{n:'Giuseppe',c:'Piccoli'},
-  '9950Lom':{n:'Giovanni / Immacolata',c:'Lombardo / Romito'},
-  '9840Cri':{n:'Laura',c:'Crispo'},
-  '6076Boc':{n:'Alessandro',c:'Boccia'},
-  '9485Gar':{n:'Emilio-Ilenia',c:'Garofalo-Diana'},
-  '9904For':{n:'Carmine',c:'Formisano*'},
-  '9969Bia':{n:'Antonio',c:'Bianchi'},
-  '6670Car':{n:'Michele',c:'Carlucci'},
-  '6912Rus':{n:'Valentina',c:'Russo'},
-  '9043Pas':{n:'Giuseppina',c:'Pastore'},
-  '9268Cas':{n:'Federica',c:'Castaldi'},
-  '8989Lan':{n:'Giuseppe Marialucia',c:'Lanzillo De Crescenzo'},
-  '9903San':{n:'Immacolata Martina',c:'Sanseverino*'},
-  '9872Avo':{n:'Raffaele',c:'Avolio'},
-  '10008IOR':{n:'ELVIRA',c:'IORIO'},
-  '9639Mar':{n:'Salvatore',c:'Marcello'},
-  '9870Ele':{n:'Valentina',c:'Elefante'},
-  '9635Gal':{n:'Anita',c:'Gallo'},
-  '9871Spi':{n:'Antonio',c:'Spinelli'},
-  '9897Sov':{n:'Santola',c:'Soviero'},
-  '9890cer':{n:'brigida',c:'ceriello'},
-  '9976Ann':{n:'Speranza (Nancy)',c:'Annunziata'},
-  '7936la':{n:'raffaele',c:'la hara'},
-  '9812Ces':{n:'Carmela',c:'Cesaro'},
-  '9964Cor':{n:'Piergiuseppe',c:'Corvino'},
-  '9958Di':{n:'Vincenzo',c:'Di Fuccia'},
-  '5164Cop':{n:'Francesco',c:'Coppola'},
-  '5357Gia':{n:'Ambra',c:'Gianluca'},
-  '5467Cap':{n:'Nunzia',c:'Capasso'},
-  '5580Cam':{n:'Francesco',c:'Camerlingo'},
-  '5575Di':{n:'Martina',c:'Di Grazia'},
-  '5534FER':{n:'ROSA',c:'FERRAIOLI'},
-  '5615Puc':{n:'Domenico',c:'Puca'},
-  '5633REG':{n:'FRANCESCA',c:'REGA'},
-  '5628Del':{n:'Adriana',c:'Dell\'Aversana'},
-  '5656pri':{n:'antonio',c:'prisco'},
-  '5717giu':{n:'felice',c:'giuliano'},
-  '5766Lap':{n:'Vincenzo',c:'Lapelazzuli'},
-  '5667FOR':{n:'IVAN - CLAUDIA',c:'FORMISANO - ESPOSITO'},
-  '5828Lap':{n:'Vincenzo',c:'Lapelazzuli'},
-  '5851COP':{n:'SALVATORE',c:'COPPOLA'},
-  '6085DI':{n:'FERDINANDO',c:'DI PALMA'},
-  '6199Lap':{n:'Vincenzo',c:'Lapelazzuli'},
-  '5944Rai':{n:'Fabiana',c:'Raimondi'},
-  '6347Mos':{n:'Sant\'arpino',c:'Mostra'},
-  '6307Sch':{n:'Fabrizia',c:'Schettini'},
-  '6350D A':{n:'Jennifer',c:'D\' Alterio'},
-  '6367Per':{n:'Pina',c:'Perrotta'},
-  '6417mur':{n:'Rita domenico',c:'murolo riccardi'},
-  '6435chi':{n:'Giovanni',c:'chiariello'},
-  '6349Sch':{n:'Fabrizia',c:'Schettini'},
-  '6466Pal':{n:'Giuseppe',c:'Palmiero'},
-  '6494Pal':{n:'Giuseppe',c:'Palmiero'},
-  '6558Men':{n:'Carmine Michela',c:'Menale graziano'},
-  '6312ote':{n:'letizia',c:'oterbo'},
-  '5941Cam':{n:'Francesco',c:'Camerlingo'},
-  '6639Rom':{n:'Alessandra',c:'Romano'},
-  '6754Del':{n:'Caterina',c:'Del Prete'},
-  '6617cop':{n:'luigi - gioacchino',c:'copertino'},
-  '7014Nob':{n:'Raffaella',c:'Nobile'},
-  '7015Sep':{n:'nunziata',c:'Sepe'},
-  '6616Del':{n:'Caterina',c:'Del Prete'},
-  '7030Aul':{n:'Maddalena',c:'Auletta'},
-  '7008Nil':{n:'Alessandra',c:'Nilo'},
-  '6812Mon':{n:'Agostino Junior',c:'Moniello'},
-  '7085Vil':{n:'Mario',c:'Villani'},
-  '6741Cop':{n:'Antonio',c:'Coppola'},
-  '7080VOZ':{n:'Oksana',c:'VOZNIAK'},
-  '7452Sel':{n:'Pasquale',c:'Sellitto'},
-  '7522Par':{n:'Angela',c:'Parente'},
-  '7165De':{n:'Antonio',c:'De Marco'},
-  '6834Cas':{n:'Francesca',c:'Casciello'},
-  '7455Rat':{n:'Camillo Mariateresa',c:'Ratto Giannola'},
-  '7623Nor':{n:'Antonio',c:'Normale'},
-  '7652De':{n:'Pasquale',c:'De Rosa'},
-  '7729Fus':{n:'Raffaela',c:'Fusco'},
-  '7661CIC':{n:'FRANCESCO',c:'CICALA'},
-  '7819Pen':{n:'Francesca',c:'Pennacchio'},
-  '7850Fra':{n:'Pina',c:'Franzese'},
-  '7912DAV':{n:'EMILIA',c:'D\'AVANZO'},
-  '7987De':{n:'Vittorio',c:'De Angelis'},
-  '7817Cas':{n:'Aldo',c:'Castagna'},
-  '7927COM':{n:'UGO ANGELO',c:'COMUNALE'},
-  '8155ian':{n:'Giuseppe',c:'iandoli'},
-  '7990Cri':{n:'Biagio',c:'Crispino'},
-  '8236DI':{n:'ANGIE',c:'DI MARTINO'},
-  '8273Don':{n:'Luigi',c:'Donadio'},
-  '8332Pag':{n:'Antonio',c:'Pagano'},
-  '8335De':{n:'Marco',c:'De Gregorio'},
-  '8225Rug':{n:'Giuseppe',c:'Ruggiero'},
-  '8363pre':{n:'raffaele',c:'prestieri'},
-  '8391Vis':{n:'Marisa',c:'Viserta'},
-  '8539Ves':{n:'Mostra',c:'Vessicchio'},
-  '8551ESP':{n:'MARTINA',c:'ESPOSITO'},
-  '6778Taf':{n:'Serena',c:'Tafuri'},
-  '6929SCA':{n:'X MOSTRA',c:'SCAVOLINI OGGETTI'},
-  '7182PAR':{n:'LUIGI',c:'PAROLA'},
-  '5814Esp':{n:'Alessandro',c:'Esposito'},
-  '7199De':{n:'Domenico',c:'De Biase'},
-  '8537Pre':{n:'Giovanna',c:'Prezioso'},
-  '8579Mar':{n:'Gaetano',c:'Marino'},
-  '8785Chi':{n:'Luigi',c:'Chiariello'},
-  '8540Lib':{n:'Ersilia',c:'Librera'},
-  '8838Cel':{n:'Giuseppe',c:'Celiento'},
-  '8716Lav':{n:'Elena',c:'Lavoretano'},
-  '8845Ras':{n:'Francesco',c:'Rasulo'},
-  '8961Sue':{n:'Domenica',c:'Suero'},
-  '8970Lav':{n:'Elena',c:'Lavoretano'},
-  '8863Sed':{n:'Carlo',c:'Sedia'},
-  '8872IAN':{n:'MARCO',c:'IANNACCHINO'},
-  '8901Por':{n:'Paolo',c:'Porcaro'},
-  '9095Rom':{n:'Marco',c:'Romano'},
-  '9289MOS':{n:'X VILLARICCA (SOLO RIPIANI VETRO)',c:'MOSTRA SPALLA/UFFICIO'},
-  '7489DUr':{n:'Liliana',c:'D\'Urso'},
-  '9061Sum':{n:'Maria Rita',c:'Summonte'},
-  '9313Cam':{n:'Per Sant\'Arpino',c:'Camera Voltan'},
-  '9321Sos':{n:'Adriatica',c:'Sost expo sant\'arpino'},
-  '9354PET':{n:'GAETANO',c:'PETROSSI'},
-  '9361Cam':{n:'Mod Zenit S.arpino',c:'Camera Le Fablier'},
-  '9491exp':{n:'solo assistenza 1 anta',c:'expo villaricca'},
-  '9508pon':{n:'elia',c:'ponticelli'},
-  '9041Vis':{n:'Antonio',c:'Visco'},
-  '9529buo':{n:'ciro',c:'buonocore'},
-  '9475Car':{n:'Ciro',c:'Carfora'},
-  '9441Piz':{n:'Valeria',c:'Pizzo'},
-  '9536Pel':{n:'Antonio',c:'Peluso'},
-  '9548Sgr':{n:'Angela',c:'Sgrò'},
-  '9566Cas':{n:'Gaetano',c:'Casillo'},
-  '9488Nas':{n:'Dario',c:'Nasti'},
-  '9377Cap':{n:'Francesca Romana',c:'Capaldo'},
-  '9634Mig':{n:'Roberta',c:'Migliorato'},
-  '9658Avo':{n:'Raffaele',c:'Avolio'},
-  '9611Di':{n:'Alessia',c:'Di Gennaro'},
-  '9659Pav':{n:'Giacomo',c:'Pavone'},
-  '4800Ros':{n:'Margherita',c:'Rossano'},
-  '6380Pir':{n:'Nicola',c:'Pirozzi'},
-  '6457Dis':{n:'Damiano',c:'D\'isidoro'},
-  '6976sch':{n:'Alfredo',c:'schiavo'},
-  '8784Cop':{n:'luigi',c:'Coppola'},
-  '9258cri':{n:'Luciano',c:'cristiano'},
-  '8498Pel':{n:'Alberto',c:'Pellecchia'},
-  '8534Di':{n:'Mario',c:'Di Micco'},
-  '8577Mas':{n:'Pasquale',c:'Massesio'},
-  '8573Mas':{n:'Pasquale',c:'Massesio'},
-  '8259Pal':{n:'Ilaria',c:'Palumbo'},
-  '8419Lom':{n:'Elena / Alfonso',c:'Lombardini / Maruzzella'},
-  '8700Cap':{n:'Maurizio / Mariangela',c:'Capasso / Pezzella'},
-  '9329Cac':{n:'Vincenzo Amedeo',c:'Cacciapuoti*'},
-  '8855Cas':{n:'Domenica',c:'Castellone'},
-  '8825Cas':{n:'Domenica',c:'Castellone'},
-  '8588Con':{n:'Roberto',c:'Conte'},
-  '8616Bel':{n:'Salvatore',c:'Belardo'},
-  '9937ACU':{n:'FABIANA',c:'ACUNZO'},
-  '8686Cri':{n:'Rossella Pio',c:'Cristofaro Iorio'},
-  '9143Iav':{n:'Claudia',c:'Iavazzo'},
-  '9186Aut':{n:'Federica',c:'Autieri'},
-  '9806Gra':{n:'Antonietta',c:'Graziano'},
-  '9963Cor':{n:'Piergiuseppe',c:'Corvino'},
-  '9233Cor':{n:'Piergiuseppe',c:'Corvino'},
-  '9254Cor':{n:'Piergiuseppe',c:'Corvino'},
-  '9262Cor':{n:'Piergiuseppe',c:'Corvino'},
-  '9304Cor':{n:'Piergiuseppe',c:'Corvino'},
-  '9334Cor':{n:'Piergiuseppe',c:'Corvino'},
-  '9255Mat':{n:'Antonella',c:'Matrulli'},
-  '9291 Pu':{n:'Gabriella',c:'Puggillo'},
-  '9305cap':{n:'vincenza',c:'capasso'},
-  '9308Pag':{n:'Francesco',c:'Pagano'},
-  '9732Fab':{n:'Nicola',c:'Fabozzi'},
-  '9821Fab':{n:'Nicola',c:'Fabozzi'},
-  '9310Fab':{n:'Nicola',c:'Fabozzi'},
-  '9621Fab':{n:'Nicola',c:'Fabozzi'},
-  '9907Fab':{n:'Nicola',c:'Fabozzi'},
-  '9847Fab':{n:'Nicola',c:'Fabozzi'},
-  '9340Cop':{n:'Francesco',c:'Coppola'},
-  '9341Rul':{n:'Assunta Antonio',c:'Rullo Bulgarelli'},
-  '9387Erp':{n:'Giusy',c:'Erpete'},
-  '9463Erp':{n:'Giusy',c:'Erpete'},
-  '9496Ila':{n:'Veronica',c:'Ilardo'},
-  '9510 Bo':{n:'annarita',c:'Borzacchiello'},
-  '9520Cop':{n:'Gennaro',c:'Coppola'},
-  '9557Pac':{n:'Nicola',c:'Paciello'},
-  '9694Gia':{n:'lorenzo',c:'Giacco'},
-  '8927De':{n:'Domenico',c:'De Rosa'},
-  '8931Di':{n:'Maria',c:'Di Giuseppe'},
-  '9624Pal':{n:'Federica',c:'Palmieri'},
-  '9648Mar':{n:'Salvatore',c:'Marcello'},
-  '9947De':{n:'Lorenzo',c:'De Maio'},
-  '9948De':{n:'Lorenzo',c:'De Maio'},
-  '9959DAM':{n:'ANTIMO',c:'D\'AMODIO'},
-  '9986De':{n:'Antonio',c:'De Costanzo'},
-  '9990Avi':{n:'Maria',c:'Avino'},
-  '9995Mar':{n:'Martina',c:'Martini'},
-  '9975Bar':{n:'Bruna Francesco',c:'Barra Cirillo'},
-  '7736Del':{n:'Pasquale',c:'Del Gaudio'},
-  '4873Bia':{n:'filomena',c:'Bianco'},
-  '8649Giu':{n:'Natascia Alessandro',c:'Giuliano Gallina'},
-  '8428Pon':{n:'Maria',c:'Ponticelli'},
-  '5134Dis':{n:'Antonella',c:'D\'isa'},
-  '9571Pez':{n:'Giuseppe',c:'Pezzella'},
-  '9802DI':{n:'GIUSEPPE',c:'DI DONATO'},
-  '9521Cer':{n:'Cosimo',c:'Cervicato'},
-  '5228Mos':{n:'Sant\'antimo',c:'Mostra'},
-  '5823Cas':{n:'Salvatore',c:'Casaburo'},
-  '8788Mar':{n:'Marialuisa',c:'Marrone'},
-  '7963RAI':{n:'MARIA ROSARIA',c:'RAINONE'},
-  '5807MIT':{n:'BRUNO',c:'MITILINI'},
-  '7084VIS':{n:'MARA',c:'VISONE'},
-  '7376Lap':{n:'Vincenzo',c:'Lapelazzuli'},
-  '7706Di':{n:'Anna',c:'Di Lauro'},
-  '6791lap':{n:'Valentina',c:'lapelazzuli'},
-  '4645Nio':{n:'Cristina',c:'Niola'},
-  '5212DAU':{n:'ANTONIO',c:'D\'AURIA'},
-  '5544BUO':{n:'ANTONIO',c:'BUONFANTE'},
-  '5660Esp':{n:'Alessandro',c:'Esposito'},
-  '6148Tro':{n:'Francesco',c:'Troisi'},
-  '5301Lil':{n:'Gianluca 2/2',c:'Lillo'},
-  '5151CIA':{n:'RODOLFO',c:'CIANCIULLI'},
-  '9889Cor':{n:'Umberto',c:'Corrado'},
-  '6185Mir':{n:'Vincenzo',c:'Mirra'},
-  '5668FOR':{n:'IVAN - CLAUDIA',c:'FORMISANO - ESPOSITO'},
-  '6487Ric':{n:'Enrico',c:'Riccardi'},
-  '4599Tov':{n:'Patrizia',c:'Tovino'},
-  '7188Cie':{n:'Rosalba',c:'Ciervo'},
-  '4657BEL':{n:'FLORIANA',c:'BELLI'},
-  '4717Dia':{n:'Maria',c:'Diana'},
-  '4781Mes':{n:'llaria',c:'Messina'},
-  '4735Hil':{n:'Silvia',c:'Hila'},
-  '4750GIA':{n:'SRL',c:'GIANCAFFE'},
-  '4765Cai':{n:'Loredana',c:'Caiazzo'},
-  '7611Ucc':{n:'Gianluca',c:'Ucciero'},
-  '4780Gig':{n:'Giovanna',c:'Giglio Sessa'},
-  '4829Bet':{n:'Mario',c:'Bettini'},
-  '4840Ran':{n:'Studio legale',c:'Ranieri'},
-  '4841CAP':{n:'ANGELA',c:'CAPUANO'},
-  '4860Cap':{n:'Anna',c:'Capuano'},
-  '5960Leo':{n:'Francesca',c:'Leone'},
-  '4881LIT':{n:'ILARIA',c:'LITTO'},
-  '4887Mag':{n:'Giuseppe',c:'Magliulo'},
-  '4890Cap':{n:'Ilenia',c:'Capasso'},
-  '4900Pas':{n:'Fabio',c:'Pastore'},
-  '7421Cap':{n:'Rosa',c:'Capuano'},
-  '6621cin':{n:'angela',c:'cinquegrana'},
-  '4928COV':{n:'VINCENZO',c:'COVONE'},
-  '8145Aur':{n:'Sara',c:'Auriemma'},
-  '4945giu':{n:'Lorena',c:'giugliano'},
-  '4947Aqu':{n:'Giorgio',c:'Aquilante'},
-  '4981PIS':{n:'VERONICA',c:'PISATURO'},
-  '9417Tam':{n:'Mariarosaria',c:'Tammaro'},
-  '5006Fer':{n:'Maria Concetta',c:'Ferraro'},
-  '5011Mir':{n:'Marianna',c:'Mirra'},
-  '5021Maz':{n:'Eduard',c:'Mazzocchi'},
-  '9800Man':{n:'Biagio',c:'Manna'},
-  '5059GIU':{n:'ANDREA',c:'GIULIANO'},
-  '5090Dag':{n:'Pasquale',c:'D\'agosto'},
-  '5091Alb':{n:'Marialuisa',c:'Alborghetti'},
-  '7976Rus':{n:'Miriana',c:'Russo'},
-  '5176Sil':{n:'Domenico',c:'Silvestre'},
-  '5183Sar':{n:'Sabrina',c:'Sarmiento'},
-  '5194SAN':{n:'BRUNO',c:'SANNINO'},
-  '5350Cop':{n:'Maria Rosaria',c:'Coppola'},
-  '5372GUL':{n:'FABIO DOMENICO',c:'GULLACI'},
-  '5375Sca':{n:'Stefano',c:'Scarpato'},
-  '5386Cap':{n:'Rosa',c:'Capuano'},
-  '5402Di':{n:'Giuseppe',c:'Di Foggia'},
-  '5418Di':{n:'Giuseppe',c:'Di Bona'},
-  '5419Zan':{n:'Michele',c:'Zannella'},
-  '5425Iaz':{n:'Maria',c:'Iazzetta'},
-  '5451Del':{n:'Maria',c:'Dell\' Aversana'},
-  '8307vio':{n:'salvatore',c:'violetti'},
-  '7825vio':{n:'salvatore',c:'violetti'},
-  '5547Aur':{n:'Michele',c:'Aurelli'},
-  '5600Fus':{n:'Paolo',c:'Fusco'},
-  '5608Lor':{n:'Maria',c:'Loreto'},
-  '5641AMO':{n:'ALESSANDRO',c:'AMODIO'},
-  '9863Man':{n:'Marco',c:'Manuzzi'},
-  '5718Sal':{n:'Rosanna',c:'Salone'},
-  '9874Dan':{n:'teresa',c:'D\'antuono'},
-  '5748Man':{n:'Mariano',c:'Manno'},
-  '5757Cri':{n:'Celeste',c:'Cristofaro'},
-  '5765Spe':{n:'Fabio',c:'Spena'},
-  '9962De':{n:'Francesco',c:'De Simone'},
-  '5206Di':{n:'Giuseppe',c:'Di Paola'},
-  '5208sin':{n:'salvatore',c:'siniscalchi'},
-  '5233Esp':{n:'Vincenzo',c:'Esposito'},
-  '5291Mic':{n:'Maurizio',c:'Micillo'},
-  '5261Mor':{n:'Giancarlo',c:'Morlacchi'},
-  '5314Red':{n:'Alessandro',c:'Redoano'},
-  '5806Ang':{n:'Nicola - Carmela',c:'Angelino - Marrazzo'},
-  '5812Esp':{n:'Gaetano',c:'Esposito'},
-  '5882Liv':{n:'Mariagiovanna / Agostino',c:'Livelio / D\'anna'},
-  '5845pre':{n:'raffaele',c:'prestieri'},
-  '5850Sta':{n:'Francesca',c:'Stabile'},
-  '5924Sco':{n:'Giovanni',c:'Scognamiglio'},
-  '5935Par':{n:'Salvatore',c:'Paribello'},
-  '6963Anz':{n:'Dario',c:'Anzevino'},
-  '5939Ter':{n:'Antonietta Mariano',c:'Terracciano Montella'},
-  '5956Con':{n:'Agostino',c:'Conte'},
-  '7856Rob':{n:'Rosa',c:'Robustelli'},
-  '8359Vis':{n:'Valentina',c:'Visciano'},
-  '6060Mir':{n:'Sara',c:'Miranda'},
-  '6074Sor':{n:'Sara',c:'Sorvillo'},
-  '6092Can':{n:'Giuseppe',c:'Cantone'},
-  '8803Cos':{n:'Alessandra',c:'Costanzo'},
-  '7757Cap':{n:'Maria Rosaria',c:'Capasso'},
-  '6187Cas':{n:'Irma Immacolata',c:'Castaniere'},
-  '6239Cir':{n:'Mariateresa',c:'Cirelli'},
-  '8032Ric':{n:'Fernanda Angela',c:'Ricciardi'},
-  '6267de':{n:'olimpia - nunzio',c:'de mario - proto'},
-  '9189Cel':{n:'Giulia',c:'Celiento'},
-  '6286Fio':{n:'Angelo',c:'Fiorenzano'},
-  '9977Gar':{n:'Giovanni',c:'Gargiulo'},
-  '6390esp':{n:'Alessandro',c:'esposito'},
-  '6398per':{n:'renzo',c:'persi'},
-  '6420Ang':{n:'Cinquegrana',c:'Angela'},
-  '6425Di':{n:'Nadia',c:'Di Caterino'},
-  '6426Bar':{n:'Sossio',c:'Barra'},
-  '6447Coz':{n:'Luigi',c:'Cozzolino'},
-  '6453Ros':{n:'Michela',c:'Rossi'},
-  '6526Bas':{n:'Arianna',c:'Bassolino'},
-  '6510Alc':{n:'Ciro',c:'Alciprete'},
-  '6529Bar':{n:'Sara',c:'Bareschino'},
-  '6540Pap':{n:'Rita',c:'Papa'},
-  '9245Abb':{n:'Simone',c:'Abbagnano'},
-  '9936Del':{n:'Antonio',c:'Delli Paoli'},
-  '6899Pet':{n:'Luca',c:'Petrachi'},
-  '6600Cio':{n:'Chiara',c:'Ciottola'},
-  '6602Mad':{n:'Valeria',c:'Madonna'},
-  '6608Fio':{n:'Vincenzo',c:'Fiore'},
-  '9944Mar':{n:'Francesco',c:'Marchese'},
-  '6660Rug':{n:'Pasquale',c:'Ruggiero'},
-  '6663Pas':{n:'Fazio',c:'Passeri'},
-  '6665DIN':{n:'NOEMI',c:'D\'INVERNO'},
-  '7871Fal':{n:'Maria',c:'Falace'},
-  '7996La':{n:'Autilia',c:'La Pietra'},
-  '9912Ott':{n:'Consiglia',c:'Ottaviano'},
-  '6804Pet':{n:'Raffaele Desirè',c:'Petrillo Santoro'},
-  '7536De':{n:'Massimiliano',c:'De Stefano'},
-  '6809Sca':{n:'Teresa',c:'Scandale'},
-  '6810Cas':{n:'Pasquale',c:'Casertano'},
-  '8339Pic':{n:'Stefania',c:'Piccirillo'},
-  '6832DAn':{n:'Domenico Erika',c:'D\'Angelo D\'Ambrosio'},
-  '6736Dan':{n:'Rosario',c:'D\'angelo'},
-  '6737DAn':{n:'Francesco',c:'D\'Aniello'},
-  '6740Cos':{n:'Mario',c:'Costabile'},
-  '8459Gia':{n:'Fabiana',c:'Giannelli'},
-  '9066Gia':{n:'Fabiana',c:'Giannelli'},
-  '6873dau':{n:'ludovica',c:'d\'auria'},
-  '6874Lan':{n:'Martina',c:'Lanza'},
-  '6884Ran':{n:'Rachele   Debora',c:'Ranieri'},
-  '6885maz':{n:'leonardo',c:'mazzuoccolo'},
-  '6770Lic':{n:'Renata',c:'Licone'},
-  '6930Don':{n:'Maurizio',c:'Donadio'},
-  '6953Far':{n:'Emilia Rosario',c:'Farina Liberti'},
-  '6956And':{n:'Maria',c:'Andreozzi'},
-  '9358Arn':{n:'Alessia',c:'Arno'},
-  '7007Bot':{n:'Vincenzo',c:'Botta'},
-  '7035Nat':{n:'Alessia',c:'Natella'},
-  '10009Bus':{n:'Nicola',c:'Busiello'},
-  '7700SCI':{n:'ANTONELLA',c:'SCINICARIELLO'},
-  '7134Gra':{n:'Assunta',c:'Grassia'},
-  '7172Bor':{n:'Nicola',c:'Borrelli'},
-  '7525Mos':{n:'divancasa box13 e comodoro',c:'Mostra Giugliano'},
-  '7206Cer':{n:'Pasquale',c:'Cerviotti'},
-  '7209Cer':{n:'Salvatore',c:'Cervone'},
-  '9667Tir':{n:'Francesca',c:'Tirozzi'},
-  '7075Del':{n:'Gerardo',c:'Del Regno'},
-  '7077Mon':{n:'Silvia Angelo',c:'Monaco Barricelli'},
-  '7091ese':{n:'marchioni',c:'esempio'},
-  '7239pag':{n:'immacolata',c:'pagano'},
-  '8591Del':{n:'Sara',c:'Del Prete'},
-  '7288Mos':{n:'Eros soppalco 2 posti',c:'Mostra Giugliano'},
-  '7299ARD':{n:'ELISABETTA',c:'ARDUINI'},
-  '7300Sel':{n:'Roberta',c:'Selvaggi'},
-  '9868POR':{n:'TOMMASO',c:'PORRICELLI'},
-  '7403Aca':{n:'Jessica',c:'Acampa'},
-  '9590Di':{n:'Filomena',c:'Di Maso'},
-  '9915Tes':{n:'Diego',c:'Tessitore'},
-  '8869De':{n:'Graziella',c:'De Simone'},
-  '7362Cac':{n:'Dalia',c:'Cacciapuoti'},
-  '7456Gio':{n:'Salvatore',c:'Gioia'},
-  '7473OGG':{n:'scavolini giugliano',c:'OGGETTISTICA ESPOSIZIONE CUCINE'},
-  '7488Pas':{n:'Damiana',c:'Pastorino'},
-  '7506Cap':{n:'Luca',c:'Capasso'},
-  '7508Cac':{n:'Giovanni',c:'Caccavale'},
-  '7530Ore':{n:'Pietro',c:'Orefice'},
-  '7544Di':{n:'Rosario',c:'Di Domenico'},
-  '7555Ang':{n:'Salvatore Giovanni',c:'Angelino'},
-  '7577Cel':{n:'Margherita',c:'Celio'},
-  '7579Ian':{n:'Nicola',c:'Ianniello'},
-  '9399Pan':{n:'Nunzio',c:'Panico'},
-  '7585str':{n:'vincenzo',c:'striano'},
-  '7655Cre':{n:'Gina Pietra',c:'Cretella'},
-  '7593Asc':{n:'Maria',c:'Ascolese'},
-  '7676PIN':{n:'FELICETTA',c:'PINCHERA'},
-  '8647Nar':{n:'Francesco',c:'Nardiello'},
-  '7687DI':{n:'GRAZIELLA',c:'DI DOMENICO'},
-  '7710Oli':{n:'Giuseppina',c:'Oliva'},
-  '7776Gir':{n:'Marialuisa',c:'Girelli'},
-  '7779Cic':{n:'Vincenzo',c:'Ciccarelli'},
-  '7800Bor':{n:'Anna Giuseppe',c:'Bortone Mariniello'},
-  '7804Vit':{n:'Paolo',c:'Vitale'},
-  '7809Pal':{n:'Giuseppe',c:'Palladino'},
-  '7834Zan':{n:'Antonio',c:'Zanfardino'},
-  '7846PAN':{n:'ANNAMARIA',c:'PANICO'},
-  '7852Gri':{n:'Alessia',c:'Griffato'},
-  '7854Di':{n:'Giuseppe',c:'Di Carlo'},
-  '7864Ran':{n:'Pasquale',c:'Ranieri'},
-  '7868Tod':{n:'Anna',c:'Todisco'},
-  '7880Cor':{n:'Alfonso',c:'Corvino'},
-  '7882can':{n:'alessandra',c:'cantile'},
-  '7893Cic':{n:'Alessia',c:'Ciccarelli'},
-  '7900Sec':{n:'Roberta',c:'Seccia'},
-  '7908Cer':{n:'Antonio',c:'Cerlino'},
-  '7939Ors':{n:'Tonia Vincenzo',c:'Orsini Rosati'},
-  '7948CAI':{n:'ASSIA',c:'CAIANIELLO'},
-  '8154Dic':{n:'Daniela',c:'Dicembrino'},
-  '7964Pri':{n:'Alfonso',c:'Primicerio'},
-  '7970Dam':{n:'Concetta',c:'Damiano'},
-  '7977Ard':{n:'Erminia',c:'Ardolino'},
-  '8001Pri':{n:'Giuseppe',c:'Primo'},
-  '8003Can':{n:'Marika',c:'Cangianiello'},
-  '8004ESP':{n:'DANIELE',c:'ESPOSITO'},
-  '8010Avi':{n:'Speranza',c:'Avino'},
-  '8011Vit':{n:'Carmela',c:'Vitiello'},
-  '8014Zig':{n:'Cristina Valerio',c:'Zigarelli Sorvillo'},
-  '8022Tom':{n:'Luca',c:'Tomacelli'},
-  '8023Aba':{n:'Raffaele',c:'Abatiello'},
-  '8026Mar':{n:'Gennaro',c:'Martone'},
-  '8051Vir':{n:'Rosa',c:'Virgi'},
-  '8052POR':{n:'MONICA',c:'PORTANOVA'},
-  '8053Mat':{n:'Francesco',c:'Matrone'},
-  '8054Ven':{n:'eduardo',c:'Venezia'},
-  '8070Fer':{n:'Marianna',c:'Ferrara'},
-  '8072Cia':{n:'Sara',c:'Ciaramella'},
-  '8076Gig':{n:'immacolata',c:'Giglio'},
-  '8112Mos':{n:'IMAB camera crea box 1',c:'Mostra Villaricca'},
-  '8113Mos':{n:'IMAB',c:'Mostra Villaricca'},
-  '8119Sap':{n:'Giuseppe',c:'Sapone'},
-  '8125Caj':{n:'Consiglia Domenico',c:'Cajafa D\'Alterio'},
-  '8129Rot':{n:'Gianluca',c:'Rotondo'},
-  '8132Can':{n:'Grazia',c:'Cantarella'},
-  '8156amo':{n:'valentina',c:'amodeo'},
-  '8159Tur':{n:'Salvatore',c:'Turco'},
-  '9987SAL':{n:'CLAUDIO/IDA',c:'SALVATORE/SCIBELLI'},
-  '8174di':{n:'filomena',c:'di laora (3 persone)'},
-  '8177DI':{n:'FRANCESCO',c:'DI LAURO'},
-  '8178de':{n:'carmela',c:'de carlo'},
-  '8180DOM':{n:'NUNZIA',c:'DOMIGNO'},
-  '8194Del':{n:'Paolo',c:'Dello Russo'},
-  '8215Dur':{n:'Valerio',c:'Durso'},
-  '8216Gra':{n:'Raffaele',c:'Grappa'},
-  '8219Ron':{n:'Carlo',c:'Ronga'},
-  '8261Vio':{n:'Luigi',c:'Viola'},
-  '8224Mor':{n:'Federica',c:'Morales'},
-  '8256Cap':{n:'Fedele',c:'Caporaso'},
-  '8269Pal':{n:'Giovanni',c:'Paladino'},
-  '8278Pol':{n:'Giuseppe',c:'Polizzi'},
-  '8240Bov':{n:'Nicola Roberta',c:'Bove Scardigno'},
-  '8251De':{n:'Sibilla',c:'De Chiara'},
-  '8289sco':{n:'salvatore',c:'scognamiglio'},
-  '8345Di':{n:'Armando',c:'Di Martino'},
-  '8374Lig':{n:'giovanni',c:'Liguori'},
-  '8304Cuo':{n:'Antonio',c:'Cuomo'},
-  '8306Mez':{n:'Luigi / Margherita',c:'Mezzacapo /Zoccolella'},
-  '8318Cer':{n:'Ernesta-Giovanni',c:'Cervone- Filocamo'},
-  '8393MAR':{n:'TERESA',c:'MARTINIELLO'},
-  '8432Pom':{n:'Dario',c:'Pompeo'},
-  '8433gra':{n:'giulia',c:'grasso'},
-  '9980Moi':{n:'Sergio/Melania',c:'Moio/Lippolis'},
-  '8446Zun':{n:'Alessandro  / Imma',c:'Zuna /  Antinozzi'},
-  '8450Bas':{n:'Vincenzo',c:'Basile'},
-  '8449Mic':{n:'angelo',c:'Micera'},
-  '8451fus':{n:'Giuseppina',c:'fusco'},
-  '9952Sic':{n:'Salvatore',c:'Sica'},
-  '8480Por':{n:'Gianfranco',c:'Porcaro'},
-  '8484Ing':{n:'Novaria',c:'Ingenito'},
-  '8527mil':{n:'michael',c:'milone'},
-  '8508Ciu':{n:'Pasquale',c:'Ciullo'},
-  '8510IOV':{n:'RITA',c:'IOVANE'},
-  '9994IOV':{n:'RITA',c:'IOVANE'},
-  '9754Aba':{n:'Paola',c:'Abate'},
-  '8400Ber':{n:'Benito Elena',c:'Bercini Giustino'},
-  '8401IER':{n:'GIUSEPPE',c:'IERVOLINO'},
-  '9487mel':{n:'alessandro',c:'mele'},
-  '8421Str':{n:'Francesco',c:'Stravolo'},
-  '8424Sco':{n:'Elvira / Nicola',c:'Scognamiglio / Del Vecchio'},
-  '8426mar':{n:'raffaele/Imma',c:'marrandino/liotto'},
-  '8523And':{n:'Paola',c:'Anderlucci'},
-  '8529Gom':{n:'Nadine',c:'Gomes'},
-  '9476Di':{n:'Gennaro',c:'Di Roberto'},
-  '8541Mus':{n:'Melania / Federico',c:'Musone / Gaviglia'},
-  '8544DAn':{n:'Giovanna Michela',c:'D\'Angelo'},
-  '8546Lo':{n:'Antonio',c:'Lo tufo'},
-  '8883IAN':{n:'FRANCESCO',c:'IANNACCONE'},
-  '8563Can':{n:'Filomena',c:'Cantone'},
-  '8566Ros':{n:'Felice Speranza',c:'Roseto Fiorillo'},
-  '8572gra':{n:'pasquale',c:'granato'},
-  '8574San':{n:'Beatrice',c:'Santiccioli'},
-  '8589Bar':{n:'Angelo',c:'Barbato'},
-  '8586esp':{n:'maria',c:'esposito'},
-  '9974Di':{n:'Antonio',c:'Di Maso'},
-  '8596Mac':{n:'Amedeo',c:'Macchione'},
-  '8624Rog':{n:'Rocco',c:'Roggiero'},
-  '8626cin':{n:'Rossella',c:'cinquegrana'},
-  '8627De':{n:'Monica',c:'De Riso'},
-  '8632Mar':{n:'Antonio',c:'Martone'},
-  '8638Inf':{n:'Gaetano',c:'Infante'},
-  '8646 Io':{n:'Pasquale',c:'Iovino'},
-  '8658ESP':{n:'DAVIDE',c:'ESPOSITO'},
-  '8659Sar':{n:'Pietro',c:'Sarno'},
-  '8662Ses':{n:'Marialaura / Fiore',c:'Sessa /Capasso'},
-  '8663Boc':{n:'elena',c:'Boccia'},
-  '8670Fio':{n:'Antonio',c:'Fiorillo'},
-  '8677La':{n:'Arianna',c:'La Marca'},
-  '8691Zup':{n:'Ernesto',c:'Zuppardi'},
-  '8693Del':{n:'Mario Rosario',c:'Della Martora'},
-  '8699De':{n:'Antonio',c:'De Angioletti'},
-  '8708aca':{n:'carolina',c:'acanfora'},
-  '8722Tiz':{n:'Rosa /   Bartolomeo Oscar',c:'Tizzano /  Di Lorenzo'},
-  '8728DES':{n:'ILARIA',c:'D\'ESPOSITO'},
-  '8739Arg':{n:'Giuseppe',c:'Argento'},
-  '8741SER':{n:'DOMENICO',c:'SERPICO'},
-  '8744mir':{n:'antonio',c:'miranda'},
-  '8745pic':{n:'carla',c:'piccolo'},
-  '9478Mic':{n:'Chiara Carmen',c:'Miceli'},
-  '8754car':{n:'marianeve',c:'carbone'},
-  '10010Dit':{n:'Antonio',c:'Dittatore'},
-  '8780zar':{n:'giuseppe',c:'zarino'},
-  '8781Alb':{n:'Vincenzo',c:'Albanese'},
-  '8782di':{n:'nicola',c:'di leva'},
-  '8732ass':{n:'scavolini madia villaricca',c:'assistenza mostra'},
-  '8822Cal':{n:'antonio',c:'Caldarelli'},
-  '8864Fio':{n:'Martina',c:'Fiorillo'},
-  '8910Sch':{n:'Anna',c:'Schettino'},
-  '8911Nap':{n:'Nadia',c:'Napolitano'},
-  '8912Gia':{n:'Carlo',c:'Gianfico'},
-  '8913RIS':{n:'FILOMENA',c:'RISPO'},
-  '8914Pag':{n:'Giustina',c:'Pagano'},
-  '8917Pil':{n:'Sara',c:'Pilloni'},
-  '8920Att':{n:'pasquale',c:'Attianese'},
-  '8932For':{n:'Mariangela',c:'Forastiere'},
-  '8935CAT':{n:'SALVATORE',c:'CATERINO'},
-  '8937Di':{n:'Danilo',c:'Di Santo'},
-  '8940Vas':{n:'Vincenzo',c:'Vastarella'},
-  '8856Can':{n:'Nicolas',c:'Cantelmi'},
-  '8857Tun':{n:'Maria',c:'Tunisino'},
-  '8873Sav':{n:'Pasquale',c:'Saviano'},
-  '8882Rug':{n:'Stefano Antonio',c:'Ruggiano'},
-  '8881Sco':{n:'Marianeve',c:'Scognamiglio'},
-  '8884Api':{n:'Emanuele',c:'Apicella'},
-  '8885VAS':{n:'VINCENZO',c:'VASCA'},
-  '8890Esp':{n:'Mariarosaria',c:'Esposito'},
-  '8893pes':{n:'achille',c:'pesce'},
-  '8894Chi':{n:'Mariasofia',c:'Chiariello'},
-  '8896Fag':{n:'Cinzia',c:'Faggiano'},
-  '8897Sop':{n:'Teresa',c:'Soprano'},
-  '8898Cut':{n:'Giovanni',c:'Cutolo'},
-  '8946GAL':{n:'ANTONIO',c:'GALASSO'},
-  '8948Zit':{n:'Ciro',c:'Zito'},
-  '8953Bia':{n:'Antonio',c:'Bianco'},
-  '9685Squ':{n:'Samantha /Mario',c:'Squitieri / Riccio'},
-  '8984Gig':{n:'Carmela',c:'Giglio'},
-  '8986Fio':{n:'Salvatore',c:'Fiorentino'},
-  '8988Car':{n:'Massimo Mario',c:'Carpino'},
-  '8990Mar':{n:'Antonio / Antonella',c:'Marrazzo / Della Volpe'},
-  '8841Car':{n:'Ingrid',c:'Cardinale'},
-  '8991Ter':{n:'Mariagiovanna',c:'Terracciano'},
-  '9501Ore':{n:'Gianluca',c:'Orefice'},
-  '9017rus':{n:'antonio',c:'russo'},
-  '9020Piz':{n:'Roberto',c:'Pizzo'},
-  '9024SEP':{n:'FRANCESCA',c:'SEPE'},
-  '9030Mar':{n:'Alessandro',c:'Marotta'},
-  '9031Sar':{n:'Francesco',c:'Sarnataro'},
-  '9034SPO':{n:'GIOVANNA',c:'SPOSITO'},
-  '9036Bal':{n:'Noemi',c:'Baldari'},
-  '8994Pez':{n:'Antonio - Mena',c:'Pezone - Pagano'},
-  '9867san':{n:'giusy',c:'santoro'},
-  '9001Ran':{n:'Francesca',c:'Ranieri'},
-  '9010Alv':{n:'Roberta',c:'Alvino'},
-  '9042Cen':{n:'gennaro',c:'Cennamo'},
-  '9051Obb':{n:'Domenico',c:'Obbedio'},
-  '9052Rus':{n:'Giovanni',c:'Russo'},
-  '9068DEL':{n:'FRANCESCO',c:'DEL PRETE'},
-  '9070CHI':{n:'DOMENICO/FEDERICA',c:'CHIMENTI /RUSSO'},
-  '9076CAM':{n:'MAFALDA',c:'CAMMISA'},
-  '9077Di':{n:'Cristian',c:'Di Vaio'},
-  '9079amb':{n:'antonio',c:'ambrosio'},
-  '9080Cer':{n:'Giovanni',c:'Cerreto'},
-  '9127Di':{n:'Roberta',c:'Di Fiore'},
-  '9082Car':{n:'Ferdinando',c:'Carafa'},
-  '9083esp':{n:'domenico',c:'esposito mocerino'},
-  '9093AUR':{n:'SALVATORE',c:'AURICCHIO'},
-  '9099sor':{n:'alessandro',c:'sorrentino oletto'},
-  '9100VEN':{n:'DAVIDE',c:'VENERUSO'},
-  '9107Pis':{n:'Paolo',c:'Pisciotta'},
-  '9108Cas':{n:'Angela',c:'Castiello'},
-  '9109oli':{n:'luigi',c:'oliviero'},
-  '9956BRA':{n:'TOMMASO',c:'BRAUCCI'},
-  '9126Gio':{n:'raffaella',c:'Giordano'},
-  '9128Bif':{n:'Emanuel',c:'Bifolco'},
-  '9130Di':{n:'Davide',c:'Di Girolamo'},
-  '9131Far':{n:'Pasquale',c:'Farina'},
-  '9133Fra':{n:'Antonio / Liliana',c:'Franzese / Babele'},
-  '9136De':{n:'Ciro / Rossella',c:'De Ponte / Guadagni'},
-  '9138GAG':{n:'CINZIA',c:'GAGLIARDI'},
-  '9984BAL':{n:'ROSA',c:'BALZANO'},
-  '9149Min':{n:'Alessandro',c:'Minerva'},
-  '9153Ber':{n:'Antonio',c:'Bernardino'},
-  '9162Rom':{n:'Caterina',c:'Romanelli'},
-  '9163Oli':{n:'Pasquale',c:'Oliva'},
-  '9165Bar':{n:'Giuseppina',c:'Barbato'},
-  '9170Gal':{n:'Antonio',c:'Galeota Lanza'},
-  '9171Sta':{n:'Carla',c:'Stabile'},
-  '9173Ias':{n:'Pasquale / Giusy',c:'Iasiello  /  Marano'},
-  '9174san':{n:'davide',c:'sannino'},
-  '9175FIO':{n:'GIOVANNI BATTISTA',c:'FIOCCOLA'},
-  '9177Ema':{n:'peluso',c:'Emanuele'},
-  '9201cas':{n:'paola',c:'castaldo'},
-  '9199mie':{n:'luigi',c:'miele'},
-  '9200Lau':{n:'Pasquale',c:'Lauro'},
-  '9202Maf':{n:'Grazia e Vito',c:'Maffione   Di Terlizzi'},
-  '9203San':{n:'Luigi',c:'Santangelo'},
-  '9204Sgu':{n:'Anna Alfonsina Pasquale',c:'Sgueglia Pagano'},
-  '9205Di':{n:'Bianca  /  Vincenzo',c:'Di raffaele / Esposito'},
-  '9206ATT':{n:'DIODATO',c:'ATTIANESE'},
-  '9207LOM':{n:'CARMINE',c:'LOMBARDI'},
-  '9213DAg':{n:'Alberto',c:'D\'Agostino'},
-  '9991Aur':{n:'Caterina',c:'Auriemma'},
-  '9235Vit':{n:'Valeria',c:'Vittorio'},
-  '9241Squ':{n:'Piero',c:'Squecco'},
-  '9242Lio':{n:'Luigi / Gelsomina',c:'Liotto / Biscardi'},
-  '9217san':{n:'carla',c:'sannino'},
-  '9228Mil':{n:'Nino',c:'Milano'},
-  '9248De':{n:'Viviana',c:'De Simone'},
-  '9265Nap':{n:'Roberta',c:'Napolano'},
-  '9269Zam':{n:'Guido',c:'Zampino'},
-  '9272MON':{n:'FELICE',c:'MONTUORI'},
-  '9280DAn':{n:'Raffaele Carmen',c:'D\'Angelo Cristiano'},
-  '9285sal':{n:'luigi',c:'salvati'},
-  '9301Gra':{n:'Luigi',c:'Grasso'},
-  '9302Sol':{n:'Martina',c:'Sollazzo'},
-  '9303Sme':{n:'Antonio Luisa',c:'Smeragliuolo Arciero'},
-  '9307Dan':{n:'Pasquale / Angela',c:'D\'angelo / Moccia'},
-  '9309man':{n:'sonia',c:'mancuso manfredonia'},
-  '9972Di':{n:'Flavia',c:'Di Perna'},
-  '9312Mas':{n:'Roberta',c:'Massimo'},
-  '9323Gam':{n:'Noemi',c:'Gambino'},
-  '9328sor':{n:'antonio',c:'sorrentino'},
-  '9333Pan':{n:'Antonio',c:'Pannone'},
-  '9335De':{n:'Giuseppe',c:'De Luca'},
-  '9371MIG':{n:'CESARIO',c:'MIGLIACCIO'},
-  '9382Pis':{n:'Pasquale / Immacolata',c:'Piscopo / Romano'},
-  '9380Bur':{n:'Remigio',c:'Burzio'},
-  '9383ROC':{n:'ISABELLA /FABIO',c:'ROCCHI/ LAMBERTI'},
-  '9388San':{n:'Michele',c:'Sannino'},
-  '9395Pic':{n:'fabiana',c:'Piccolo'},
-  '9423Ron':{n:'Federica',c:'Ronga'},
-  '9429ram':{n:'alessandro',c:'ramaglia'},
-  '9430Mar':{n:'Maria',c:'Marotta'},
-  '9431Vig':{n:'William',c:'Viggiano'},
-  '9338Di':{n:'Carmen',c:'Di Santillo'},
-  '9347Mig':{n:'Martina',c:'Migliatico'},
-  '9356bas':{n:'serena',c:'basilicata'},
-  '9359bug':{n:'giovanni',c:'buglione'},
-  '9438Pad':{n:'Giuseppe',c:'Padricelli'},
-  '9440STA':{n:'LINO',c:'STANZIONE'},
-  '9942STA':{n:'LINO',c:'STANZIONE'},
-  '9449Mil':{n:'Francesca',c:'Milo'},
-  '9454Ver':{n:'Giovanna',c:'Verdolotti'},
-  '9459Gua':{n:'Pietro',c:'Guarino'},
-  '9497rus':{n:'emmanuele',c:'russo'},
-  '9506Can':{n:'Caterina',c:'Canò'},
-  '9507Di':{n:'Alessandra Marinella',c:'Di Sette'},
-  '9514IAN':{n:'ANNA',c:'IANNICELLI'},
-  '9516fri':{n:'federica',c:'frigione'},
-  '9518Pap':{n:'Anna',c:'Paparo'},
-  '9522Sca':{n:'Filippo  Anna',c:'Scarano Russo Spena'},
-  '9524Gal':{n:'Mario',c:'Gallucci'},
-  '9535Cir':{n:'rosa',c:'Cirillo'},
-  '9539Rom':{n:'Luca',c:'Romano'},
-  '9540Dur':{n:'Daniele',c:'Durante'},
-  '9761GRU':{n:'STEFANO',c:'GRUMETTO'},
-  '9465Cre':{n:'Salvatore',c:'Cretella'},
-  '9467Cap':{n:'Romolo/Maria',c:'Capponi/Giovannettone'},
-  '9470Pel':{n:'Maria Pia Vincenzo',c:'Pellino Crisci'},
-  '9545ASC':{n:'CONSIGLIA',c:'ASCIONE'},
-  '9546Nap':{n:'Emanuele',c:'Napoletano'},
-  '9547DI':{n:'DAVIDE',c:'DI VUOLO'},
-  '9553Pap':{n:'Antonella',c:'Papallo'},
-  '9556rus':{n:'gianmario',c:'russo'},
-  '9559San':{n:'Luca',c:'Santaniello'},
-  '9560Cov':{n:'Giuseppina',c:'Coviello'},
-  '9561de':{n:'esterina',c:'de rosa'},
-  '9563Giu':{n:'Francesco',c:'Giugliano'},
-  '9564Cri':{n:'Marco',c:'Cristofaro'},
-  '9565Mol':{n:'Gianpiero',c:'Mollo'},
-  '9567De':{n:'Sara',c:'De Simone'},
-  '9570san':{n:'gennaro',c:'sangiovanni'},
-  '9575PIR':{n:'ROBERTO',c:'PIRO'},
-  '9573Mal':{n:'Olha',c:'Malets'},
-  '9574Fio':{n:'Maria',c:'Fiorillo'},
-  '9577ORA':{n:'ANASTASIA',c:'ORAZZO'},
-  '9578MAI':{n:'GIOVANNI',c:'MAINIERO'},
-  '9594DEL':{n:'ACHILLE',c:'DEL PRETE'},
-  '9605Ren':{n:'Luigi',c:'Renzimucco'},
-  '9597Sar':{n:'Emanuela/Alessandro',c:'Sarnelli/Police'},
-  '9599Bor':{n:'Mariagrazia',c:'Bortone'},
-  '9602Nic':{n:'Renato',c:'Nicolosi'},
-  '9603Bon':{n:'Rosalba',c:'Bonomo'},
-  '9607Ale':{n:'Gianmarco',c:'Aletto'},
-  '9633sim':{n:'achille',c:'simonetti'},
-  '9637Cil':{n:'Raffaele',c:'Ciliberti'},
-  '9683Dur':{n:'Sergio',c:'Durso'},
-  '9640giu':{n:'lucia',c:'giugliano'},
-  '9641DE':{n:'GABRIELE',c:'DE FALCO'},
-  '9913DE':{n:'GABRIELE',c:'DE FALCO'},
-  '9642pan':{n:'antonio',c:'panico'},
-  '9643Mai':{n:'Vincenzo Raffaella',c:'Maina  Cristofaro'},
-  '9644Com':{n:'Luana',c:'Communara'},
-  '9650Lic':{n:'Lucia',c:'Liccardo'},
-  '9662IMB':{n:'FABIANA',c:'IMBIMBO'},
-  '9663Maz':{n:'Roberto',c:'Mazzocchi'},
-  '9668Seq':{n:'Raffaele',c:'Sequino'},
-  '9676Luo':{n:'Emilio Susy',c:'Luongo Caserta'},
-  '9678alf':{n:'raffaele',c:'alfano'},
-  '9679Fin':{n:'Fabiola Giovanni',c:'Finelli  Fabiano'},
-  '9689De':{n:'Gianluigi',c:'De Martino'},
-  '9691San':{n:'Daniele',c:'Santaniello'},
-  '9695Di':{n:'Luca Sara',c:'Di Ronza Di Gennaro'},
-  '9697Con':{n:'vincenzo',c:'Contaldo'},
-  '9699DAm':{n:'Colomba',c:'D\'Amelio'},
-  '9701cer':{n:'michela',c:'cerbone'},
-  '9704Cos':{n:'Angelo',c:'Costanzo'},
-  '9710ran':{n:'michele',c:'ranieri'},
-  '9973Cac':{n:'Vincenzo',c:'Cacciapuoti'},
-  '9725DEL':{n:'ILARIA',c:'DELLA PUCA'},
-  '9726PAO':{n:'MARTINA',c:'PAOLINO'},
-  '9729Ros':{n:'Giuseppe',c:'Rosica'},
-  '9730Ari':{n:'Lorenzo',c:'Arienzo'},
-  '9860Ari':{n:'Lorenzo',c:'Arienzo'},
-  '9733CIP':{n:'FRANCESCO',c:'CIPOLLETTA'},
-  '9735Mir':{n:'Maria',c:'Mirra'},
-  '9740val':{n:'pasquale',c:'valisena'},
-  '9742Don':{n:'Annunziata',c:'Donetto'},
-  '9746MEN':{n:'GIUSEPPE',c:'MENNA'},
-  '9748Cri':{n:'Gianluca',c:'Cristiano'},
-  '9771men':{n:'antonio',c:'menna'},
-  '9772Lau':{n:'Emanuele',c:'Lauro'},
-  '9773Sco':{n:'giuseppina',c:'Scognamiglio'},
-  '9774Ven':{n:'Brigida Enrico',c:'Venosa Di Meo'},
-  '9777Di':{n:'angelica',c:'Di Biasi'},
-  '9760Pal':{n:'Sarah',c:'Palomba'},
-  '9762CAM':{n:'SEBASTIANO',c:'CAMPANILE'},
-  '9763Del':{n:'Filomena',c:'Delle Cave'},
-  '9764BOR':{n:'RITA',c:'BORRELLI'},
-  '9765gra':{n:'anna',c:'grassi'},
-  '9766Bor':{n:'Antonietta Cesario',c:'Bortone Turco'},
-  '9767IAN':{n:'VINCENZA',c:'IANNONE'},
-  '9769Can':{n:'Rosalba/Stefano',c:'Cannavo/Precchia'},
-  '9783Laz':{n:'Giuseppe',c:'Lazzaro'},
-  '9839Lan':{n:'Elena',c:'Landro'},
-  '9844SAN':{n:'PASQUA',c:'SANTANIELLO'},
-  '9938San':{n:'Anna',c:'Santangelo'},
-  '9845San':{n:'Anna',c:'Santangelo'},
-  '9846IAN':{n:'ADRIANO',c:'IANDOLI'},
-  '9848TOR':{n:'EZIO',c:'TORTORA'},
-  '9849par':{n:'pasquale',c:'parrella'},
-  '9850Ver':{n:'Carmine',c:'Verdicchio'},
-  '9851Nat':{n:'Fabio Nicola',c:'Natale'},
-  '9852La':{n:'Vincenzo',c:'La Gatta'},
-  '9853Dal':{n:'umberto',c:'Dalvisi'},
-  '9854Di':{n:'Assunta',c:'Di Vaio'},
-  '9855pic':{n:'salvatore',c:'piccolo'},
-  '9865Mor':{n:'Stefano',c:'Moriello'},
-  '9989DAm':{n:'Francesco',c:'D\'Ambra'},
-  '9878DAm':{n:'Francesco',c:'D\'Ambra'},
-  '9883Man':{n:'Gianluca',c:'Manna'},
-  '9885Pis':{n:'Angela',c:'Piscopo'},
-  '9886sal':{n:'margherita',c:'salerno'},
-  '9887CAL':{n:'GIANMARCO',c:'CALDARELLI'},
-  '9888Pas':{n:'Francesca',c:'Pascarella'},
-  '9921Pas':{n:'Francesca',c:'Pascarella'},
-  '9893sor':{n:'emilia',c:'sorrentino'},
-  '9945qui':{n:'francesco',c:'quirile'},
-  '9901DEr':{n:'Maria Fatima',c:'D\'Errico'},
-  '9900Car':{n:'Ciro',c:'Carfora'},
-  '9919Fra':{n:'Michela',c:'Franzese'},
-  '9924Mox':{n:'Gianluca',c:'Moxedano'},
-  '9927Giu':{n:'Marco',c:'Giuliano'},
-  '9928Nun':{n:'Maria Francesco',c:'Nunziata Muriano'},
-  '9929Mel':{n:'Salvatore',c:'Melillo'},
-  '9930Sic':{n:'Marco',c:'Siciliano'},
-  '9931di':{n:'carmen',c:'di martino'},
-  '9935IOF':{n:'CATERINA',c:'IOFFREDO'},
-  '9939DI':{n:'FRANCESCO',c:'DI SANTO'},
-  '9941bar':{n:'antonio',c:'bartolucci'},
-  '9946Esp':{n:'Vincenzo',c:'Esposito'},
-  '9955Bai':{n:'Maria Rita',c:'Baio'},
-  '9951De':{n:'francesco',c:'De simone'},
-  '9953Rau':{n:'Giovanna',c:'Raucci'},
-  '9954Gia':{n:'Emanuela',c:'Giappone'},
-  '9957Mal':{n:'Raffaele',c:'Malafronte'},
-  '9960Sch':{n:'Francesco',c:'Schetter'},
-  '9961RIC':{n:'MARIA',c:'RICCIO'},
-  '9965Bio':{n:'Aurelio',c:'Biondi'},
-  '9966Mus':{n:'Carolina',c:'Musto'},
-  '9967Ame':{n:'Alessandra Vincenzo',c:'Amendola Picone'},
-  '9971Cap':{n:'Lidia',c:'Capasso'},
-  '9983CAP':{n:'EMANUEL',c:'CAPPIELLO'},
-  '9999Mon':{n:'Gianfranco',c:'Monteforte'},
-  '9992CAR':{n:'ERIKA',c:'CARBONE'},
-  '9993esp':{n:'daniela',c:'esposito'},
-  '9996MAT':{n:'CONCETTA',c:'MATTIELLO'},
-  '9998bia':{n:'milena',c:'bianco'},
-  '10000Bar':{n:'Giovanna',c:'Barbato'},
-  '10001gal':{n:'roberta',c:'gallo'},
-  '10002MUR':{n:'ALESSIA',c:'MUROLO'},
-  '10007tar':{n:'concetta-Antonio',c:'tartaglione-Esposito'},
-  '10003Ped':{n:'Ferdinando',c:'Pedone'},
-  '9793Amb':{n:'Desire\'e',c:'Ambrosino di Bruttopilo'},
-  '9798Fio':{n:'Agostino',c:'Fiore'},
-  '9799DE':{n:'ANTONELLA',c:'DE MARTINO'},
-  '9801Dag':{n:'Stefania',c:'D\'agostino'},
-  '9898Dag':{n:'Stefania',c:'D\'agostino'},
-  '9803Cac':{n:'vincenzo',c:'Caccavo'},
-  '9804Iov':{n:'Sara Mario',c:'Iovinella Liberato'},
-  '9805COL':{n:'DESIRE\'',c:'COLETTA'},
-  '9814Rus':{n:'Imma/Pasquale',c:'Russo/Giangrande'},
-  '9820Bor':{n:'Gianluca',c:'Borrelli'},
-  '9829Car':{n:'Romina',c:'Caruso'},
-  '4969fus':{n:'raffaele',c:'fusco'},
-  '4869Dan':{n:'Maria Paola',c:'D\'andrea'},
-  '4653FER':{n:'VINCENZO',c:'FERRARA'},
-  '5448Lap':{n:'Vincenzo',c:'Lapelazzuli'},
-  '4935Ill':{n:'Francesca',c:'Illiano'},
-  '4775Buo':{n:'Carmela',c:'Buonanno'},
-  '6610Per':{n:'Raffaella',c:'Perrotta'},
-  '7218Mos':{n:'Colombini',c:'Mostra Giugliano'},
-  '7418mos':{n:'duebi box 6 &7',c:'mostra giugliano'},
-  '7961sar':{n:'prova',c:'sara'},
-  '7814Bis':{n:'Elisabetta',c:'Bisio'},
-  '8284Esp':{n:'Antonella',c:'Esposito*'},
-  '8717DAm':{n:'Massimo',c:'D\'Ambrosio'},
-  '8687Iov':{n:'Gilda',c:'Iovine'},
-  '9509Sed':{n:'Carlo',c:'Sedia'},
-  '9378MEL':{n:'TERESA/GIUSEPPE',c:'MELE/SENESE'}
-};
-
-// ═══════════════════════════════════════════════════════════════
-// DATI_COMMISSIONI: copia il contenuto della variabile 
-// DATI_COMMISSIONI dal precedente index.html e incollalo qui.
-// ═══════════════════════════════════════════════════════════════
-const DATI_COMMISSIONI = {};
-
-
-
-// ── CONFIGURAZIONE ──
-const SHEET_ID = 'IL_TUO_SHEET_ID_QUI';
-const COMMISSIONI_SHEET = 'COMMISSIONI';
-const ARREDATORI_SHEET = 'ARREDATORI';
-
-// ── ARREDATORI con URL 3CX ──
-const DEMO_ARREDATORI = [
-  { nome:'Luigi', cognome:'Franzese', negozio:'Ottaviano', cx:'https://arredamenticinquegrana.my3cx.it/luigifranzese' },
-  { nome:'Stefania', cognome:'Ciardulli', negozio:'Giugliano in Campania', cx:'https://arredamenticinquegrana.my3cx.it/stefaniaciardulli' },
-  { nome:'Angela', cognome:'Cinquegrana', negozio:"Sant'Arpino", cx:'https://arredamenticinquegrana.my3cx.it/angelacinquegrana' },
-  { nome:'Alessandro', cognome:'Esposito', negozio:"Sant'Arpino", cx:'https://arredamenticinquegrana.my3cx.it/alessandroesposito' },
-  { nome:'Filomena', cognome:'Carfora', negozio:'Giugliano in Campania', cx:'https://arredamenticinquegrana.my3cx.it/filomenacarfora' },
-  { nome:'Lino', cognome:'Guida', negozio:'Villaricca', cx:'https://arredamenticinquegrana.my3cx.it/linoguida' },
-  { nome:'Francesca', cognome:'Puoti', negozio:"Sant'Arpino", cx:'https://arredamenticinquegrana.my3cx.it/francescapuoti' },
-  { nome:'Rossella', cognome:'Cinquegrana', negozio:"Sant'Arpino", cx:'https://arredamenticinquegrana.my3cx.it/rossellacinquegrana' },
-  { nome:'Bruno', cognome:'Barrella', negozio:'Villaricca', cx:'https://arredamenticinquegrana.my3cx.it/brunobarrella' },
-  { nome:'Antonella', cognome:"D'Isa", negozio:'Giugliano in Campania', cx:'https://arredamenticinquegrana.my3cx.it/antonelladisa' },
-  { nome:'Pietro', cognome:'Cerreto', negozio:"Sant'Arpino", cx:'https://arredamenticinquegrana.my3cx.it/pietrocerreto' },
-  { nome:'Ciro', cognome:'Carfora', negozio:'Giugliano in Campania', cx:'https://arredamenticinquegrana.my3cx.it/cirocarfora' },
-  { nome:'Annalisa', cognome:'Severino', negozio:'Giugliano in Campania', cx:'https://arredamenticinquegrana.my3cx.it/annalisaseverino' },
+// ─── DATA ───────────────────────────────────────────
+const orders = [
+  { code:"7646Sor", cognome:"Sorrentino", nome:"Ciro", desc:"08 x SEDIA QUEEN VELVET TORTORA - Cod. 0734287", qty:"8,00", dateComm:"02/11/2024", dateCarico:"26/02/2026", status:"In giacenza" },
+  { code:"8906Bas", cognome:"Basco", nome:"Lucia", desc:"N.8 Sedie mod.New Irelia beige Cod. 0734235", qty:"8,00", dateComm:"20/08/2025", dateCarico:"26/02/2026", status:"In giacenza" },
+  { code:"6467LIC", cognome:"LICCARDO-Pierro", nome:"SALVATORE-Concetta", desc:"Viti brunite per maniglia cassetto cabina", qty:"8,00", dateComm:"22/02/2024", dateCarico:"23/02/2024", status:"In giacenza" },
+  { code:"8622Cas", cognome:"Casella", nome:"Salvatore", desc:"N.6 SEDIA QUEEN VELVET TORTORA Cod. 0734287", qty:"6,00", dateComm:"16/06/2025", dateCarico:"06/02/2026", status:"In giacenza" },
+  { code:"8622Cas", cognome:"Casella", nome:"Salvatore", desc:"N.2 SGABELLO BAR NEW IRELIA NERO/VEL.TORTORA Cod. 0734242", qty:"2,00", dateComm:"16/06/2025", dateCarico:"06/02/2026", status:"In giacenza" },
+  { code:"8082var", cognome:"Vargas", nome:"Maria", desc:"06 sedie Mod.Oslo con basamento bronz antic tessuto Zoya 03 elegance", qty:"6,00", dateComm:"17/02/2025", dateCarico:"27/02/2026", status:"In giacenza" },
+  { code:"8082var", cognome:"Vargas", nome:"Maria", desc:"02 sgabello Mod.Oslo H.seduta 65cm, tessuto Zoya 03 elegance, basamento bronz antic", qty:"2,00", dateComm:"17/02/2025", dateCarico:"27/02/2026", status:"In giacenza" },
+  { code:"9622BOE", cognome:"BOEMIO", nome:"ALESSANDRO", desc:"Sedie in tessuto Gemma categoria classic colore verde 843 struttura metallo ovale colore antracite", qty:"6,00", dateComm:"14/01/2026", dateCarico:"27/02/2026", status:"In giacenza" },
+  { code:"9243de", cognome:"De Sarno", nome:"Giuseppe", desc:"Sedia modello Monica piedi metal black 9005, seduta paris petrol 09 ambiente", qty:"6,00", dateComm:"19/10/2025", dateCarico:"27/02/2026", status:"In giacenza" },
+  { code:"9243de", cognome:"De Sarno", nome:"Giuseppe", desc:"Sgabello modello Lupo h seduta 65, piede colore metal black 9005, colore seduta paris Dark blue 33 ambiente", qty:"2,00", dateComm:"19/10/2025", dateCarico:"27/02/2026", status:"In giacenza" },
+  { code:"9558Di", cognome:"Di Matteo", nome:"Luigi", desc:"Sedia queen in velluto tortora con piede metallo verniciato nero", qty:"6,00", dateComm:"28/12/2025", dateCarico:"26/02/2026", status:"In giacenza" },
+  { code:"9631Pal", cognome:"Palmieri", nome:"Federica", desc:"Sedia queen rivestita in velluto tortora con piede metallo nero", qty:"6,00", dateComm:"15/01/2026", dateCarico:"26/02/2026", status:"In giacenza" },
+  { code:"8764Auf", cognome:"Aufiero", nome:"Mariarosaria", desc:"Cod. 0734281 SEDIA QUEEN VELVET GRIGIO CADETTO", qty:"6,00", dateComm:"15/07/2025", dateCarico:"26/02/2026", status:"In giacenza" },
+  { code:"9231COL", cognome:"COLANTONIO", nome:"CARLO", desc:"SEDIE JOE COD.5723 JOE BLACK_VELLUTO NERO", qty:"6,00", dateComm:"18/10/2025", dateCarico:"05/03/2026", status:"In giacenza" },
+  { code:"9543De", cognome:"De Laurentiis Casoria", nome:"Stefania Giuseppe", desc:"Sedie Daisy Velvet Black cod.4737 - rivestita in morbido tessuto effetto velluto, struttura in metallo Nero opaco", qty:"6,00", dateComm:"21/12/2025", dateCarico:"13/03/2026", status:"In giacenza" },
+  { code:"9700Aba", cognome:"Abatiello", nome:"Clemente", desc:"N.6 SEDIA HERO - GAMBA DRITTA polipropilene tortora", qty:"6,00", dateComm:"25/01/2026", dateCarico:"17/03/2026", status:"In giacenza" },
+  { code:"8993Abb", cognome:"Abbrunzo", nome:"Rita", desc:"06 Sedia modello Alberta - tessuto norn yellow 65 - Piede in nitroemail", qty:"6,00", dateComm:"07/09/2025", dateCarico:"19/03/2026", status:"In giacenza" },
+  { code:"8993Abb", cognome:"Abbrunzo", nome:"Rita", desc:"02 Sgabello modello Alberta - tessuto norn yellow 65 - Piede black", qty:"2,00", dateComm:"07/09/2025", dateCarico:"19/03/2026", status:"In giacenza" },
+  { code:"8993Abb", cognome:"Abbrunzo", nome:"Rita", desc:"02 x Cameretta: Letto imbottito con contenitore 120x190 modello Nilo; Comodino L40 modello Tweet + Mensola office L120; Armadio angolare e modulo da L45 H256", qty:"2,00", dateComm:"07/09/2025", dateCarico:"20/03/2026", status:"In giacenza" },
+  { code:"8995Lan", cognome:"Langella", nome:"Vittoria", desc:"06 x Sedia poltrona mod. Sofia - Tessuto Raven Beige 24 - Piede in legno Nitroemail Alb9016", qty:"6,00", dateComm:"07/09/2025", dateCarico:"19/03/2026", status:"In giacenza" },
+  { code:"8668Mas", cognome:"Massesio", nome:"Pasquale", desc:"06 SEDIE MOD. CLARK - Maserati Light Beige + Maserati Oily, basamento nero BLACK 9005 METAL", qty:"6,00", dateComm:"29/06/2025", dateCarico:"19/03/2026", status:"In giacenza" },
+  { code:"8668Mas", cognome:"Massesio", nome:"Pasquale", desc:"02 SGABELLI MOD. CLARK MASERATI LIGHT BEIGE, altezza 65cm. BASAMENTO NERO BLACK 9005 METAL", qty:"2,00", dateComm:"29/06/2025", dateCarico:"19/03/2026", status:"In giacenza" },
+  { code:"9326DI", cognome:"DI MAIO", nome:"GIUSEPPE", desc:"SEDIE MALAGA NEW col. 5h21 soft_touch / 6k13 CACAO EASY TOUCH, piedi metallo 0139 METALLO TERRA", qty:"6,00", dateComm:"06/11/2025", dateCarico:"24/03/2026", status:"In giacenza" },
+  { code:"8309Cin", cognome:"Cinquegrana", nome:"Paola", desc:"Denver idrorepellente colore grigio", qty:"6,00", dateComm:"27/03/2025", dateCarico:"04/04/2025", status:"In giacenza" },
+  { code:"8846Car", cognome:"Cardinali", nome:"Alda", desc:"Sedia pieghevole Klesia_01", qty:"6,00", dateComm:"04/08/2025", dateCarico:"15/10/2025", status:"In giacenza" },
+  { code:"9040Fio", cognome:"Fiorentino", nome:"Erminia", desc:"Sedia tokio piede ovale metallo nero black 9005, tessuto norn yellow 65 classic", qty:"4,00", dateComm:"15/09/2025", dateCarico:"17/02/2026", status:"In giacenza" },
+  { code:"9492MAR", cognome:"MARIA", nome:"DANILA", desc:"Struttura antracite e tessuto easy clean colore jeans grigio", qty:"4,00", dateComm:"05/12/2025", dateCarico:"17/02/2026", status:"In giacenza" },
+  { code:"9097Sgr", cognome:"Sgrò", nome:"Angela", desc:"04 sgabello mod. clark con struttura nero, tessuto paris bordeaux 37 - ambiente", qty:"4,00", dateComm:"22/09/2025", dateCarico:"27/02/2026", status:"In giacenza" },
+  { code:"9097Sgr", cognome:"Sgrò", nome:"Angela", desc:"4 guanciali in memory", qty:"4,00", dateComm:"22/09/2025", dateCarico:"06/03/2026", status:"In giacenza" },
+  { code:"9097Sgr", cognome:"Sgrò", nome:"Angela", desc:"Lampade cherry sospensione diametro 26 lucido bordeaux", qty:"2,00", dateComm:"22/09/2025", dateCarico:"03/02/2026", status:"In giacenza" },
+  { code:"9097Sgr", cognome:"Sgrò", nome:"Angela", desc:"Poket 160x190 materassi molle indipendenti con strato di memory e fascia di areazione 3d", qty:"2,00", dateComm:"22/09/2025", dateCarico:"06/03/2026", status:"In giacenza" },
+  { code:"9757La", cognome:"La Camera", nome:"Antonio", desc:"Sedia thomas con piede ovale nero black 9005, rivestimento in tessuto vega grey beige 11 cat ambiente", qty:"4,00", dateComm:"05/02/2026", dateCarico:"27/02/2026", status:"In giacenza" },
+  { code:"9757La", cognome:"La Camera", nome:"Antonio", desc:"Sgabello modello alberta piede ovale nero black 9005, rivestimento tessuto paris lima 06 verde cat ambiente, h.seduta 65cm", qty:"2,00", dateComm:"05/02/2026", dateCarico:"27/02/2026", status:"In giacenza" },
+  { code:"9914Car", cognome:"Carfora", nome:"Ciro", desc:"04 Guanciali", qty:"4,00", dateComm:"06/03/2026", dateCarico:"06/03/2026", status:"In giacenza" },
+  { code:"9234Aur", cognome:"Auriemma", nome:"Caterina", desc:"04 sedia SE1C4-KUDO in clean-touch bluejeans seduta struttura terra 0139", qty:"4,00", dateComm:"18/10/2025", dateCarico:"24/03/2026", status:"In giacenza" },
+  { code:"9234Aur", cognome:"Auriemma", nome:"Caterina", desc:"02 sedia SE1C4-KUDO in clean-touch bluejeans seduta struttura terra 0139", qty:"2,00", dateComm:"18/10/2025", dateCarico:"24/03/2026", status:"In giacenza" },
+  { code:"9234Aur", cognome:"Auriemma", nome:"Caterina", desc:"02 sgabello mod.okinawa struttura terra 0139, seduta clean-touch bluejeans 6J18", qty:"2,00", dateComm:"18/10/2025", dateCarico:"24/03/2026", status:"In giacenza" },
+  { code:"9943BRA", cognome:"BRAUCCI", nome:"TOMMASO", desc:"N. 3 FRONTALE 60X60 CLV PER MADIA", qty:"3,00", dateComm:"12/03/2026", dateCarico:"24/03/2026", status:"In giacenza" },
+  { code:"9018Cop", cognome:"Coppola", nome:"Luigi", desc:"N. 3 fasce di tamponamento rifilate (98,5H x 3.5L + 55Lx7H + 229Hx6,5L)", qty:"3,00", dateComm:"11/09/2025", dateCarico:"16/10/2025", status:"In giacenza" },
+  { code:"9834MOS", cognome:"MOSTRA MADIA + Sgabelli", nome:"Scavolini", desc:"02 SGABELLO BLAZER - Estetica: BLAZER GAMBE RIV.TESS.NABUK, Colore struttura: Teknofibra_41", qty:"2,00", dateComm:"19/02/2026", dateCarico:"25/02/2026", status:"In giacenza" },
+  { code:"5329DE", cognome:"DE FELICE", nome:"ALESSANDRA", desc:"SOSTITUZIONE TOP IN LAM LAM. AZIMUT SP.2", qty:"2,00", dateComm:"22/05/2023", dateCarico:"01/03/2023", status:"In giacenza" },
+  // Consegnati
+  { code:"4775Buo", cognome:"Buonanno", nome:"Carmela", desc:"Camera come progetto comodini mod. pikel tutto laminato grigio con maniglia inserto noce malizia", qty:"1,00", dateComm:"07/02/2023", dateCarico:"10/10/2023", dateConsegna:"02/04/2024", status:"Consegnato" },
+  { code:"4775Buo", cognome:"Buonanno", nome:"Carmela", desc:"Consolle in metallo finitura oro con piano in specchio da expò", qty:"1,00", dateComm:"07/02/2023", dateCarico:"29/03/2024", dateConsegna:"02/04/2024", status:"Consegnato" },
+  { code:"6610Per", cognome:"Perrotta", nome:"Raffaella", desc:"Tavolo allungabile DHORIS WHITE MARBLE cod.5566 - piano in ceramica finitura Marmo Bianco opaco cm.H75xP90xL140/200", qty:"1,00", dateComm:"23/03/2024", dateCarico:"22/05/2024", dateConsegna:"02/07/2024", status:"Consegnato" },
+  { code:"6610Per", cognome:"Perrotta", nome:"Raffaella", desc:"04 Sedie IRELIA VELLUTO TORTORA cod. 0733176", qty:"4,00", dateComm:"23/03/2024", dateCarico:"23/05/2024", dateConsegna:"02/07/2024", status:"Consegnato" },
+  { code:"9378MEL", cognome:"MELE/SENESE", nome:"TERESA/GIUSEPPE", desc:"Montare mensole/schienali e cornice cucina", qty:"1,00", dateComm:"15/11/2025", dateCarico:"23/01/2026", dateConsegna:"26/01/2026", status:"Consegnato" },
+  { code:"9378MEL", cognome:"MELE/SENESE", nome:"TERESA/GIUSEPPE", desc:"PUSH PER BASE CUCINA", qty:"1,00", dateComm:"15/11/2025", dateCarico:"04/12/2025", dateConsegna:"26/01/2026", status:"Consegnato" },
+  { code:"9378MEL", cognome:"MELE/SENESE", nome:"TERESA/GIUSEPPE", desc:"Sostituzione testata letto", qty:"1,00", dateComm:"15/11/2025", dateCarico:"05/12/2025", dateConsegna:"26/01/2026", status:"Consegnato" },
+  { code:"9378MEL", cognome:"MELE/SENESE", nome:"TERESA/GIUSEPPE", desc:"Sostituzione n°3 ante graffiate", qty:"1,00", dateComm:"15/11/2025", dateCarico:"05/12/2025", dateConsegna:"26/01/2026", status:"Consegnato" },
+  { code:"8862Pro", cognome:"Prositto", nome:"Gianluigi", desc:"Fianco dx da 60 (non arrivato)", qty:"1,00", dateComm:"06/08/2025", dateCarico:"19/09/2025", dateConsegna:"09/02/2026", status:"Consegnato" },
+  { code:"8862Pro", cognome:"Prositto", nome:"Gianluigi", desc:"Gruppo piedi trasparenti (comò e comodini)", qty:"1,00", dateComm:"06/08/2025", dateCarico:"15/10/2025", dateConsegna:"09/02/2026", status:"Consegnato" },
+  { code:"8687Iov", cognome:"Iovine", nome:"Gilda", desc:"Letto matrimoniale mod.Elix a misura speciale 180x200 con rete a doghe di legno, struttura noce brown e testata in tessuto Ocra Jupiter 08", qty:"1,00", dateComm:"03/07/2025", dateCarico:"10/09/2025", dateConsegna:"22/09/2025", status:"Consegnato" },
+  { code:"9509Sed", cognome:"Sedia", nome:"Carlo", desc:"Art. 31108308 RADIOCOMANDO SMART UP 1 MONO MECCANO", qty:"1,00", dateComm:"10/12/2025", dateCarico:"19/01/2026", dateConsegna:"22/01/2026", status:"Consegnato" },
+  { code:"8284Esp", cognome:"Esposito", nome:"Antonella", desc:"Cameretta ponte 3 letti completa di materassi, con elemento armadio due ante e cassetti prof. 60 H.257 e un elemento libreria prof. 33 H.259", qty:"1,00", dateComm:"22/03/2025", dateCarico:"12/06/2025", dateConsegna:"11/07/2025", status:"Consegnato" },
+  { code:"8284Esp", cognome:"Esposito", nome:"Antonella", desc:"Camera da letto: Armadio scorr. mod. Board+Riflesso 3 ante, 2 Comodini mod. Bob e 1 Settimino", qty:"1,00", dateComm:"22/03/2025", dateCarico:"13/06/2025", dateConsegna:"11/07/2025", status:"Consegnato" },
+  { code:"8284Esp", cognome:"Esposito", nome:"Antonella", desc:"Letto contenitore mod. Beatrice Bottoni 160x190 - Art. Alfa - Col. Toffee - Cat. SUPER", qty:"1,00", dateComm:"22/03/2025", dateCarico:"13/06/2025", dateConsegna:"11/07/2025", status:"Consegnato" },
+  { code:"8284Esp", cognome:"Esposito", nome:"Antonella", desc:"Cucina h.206 con ante decorative colore Nebbia, completa di elettrodomestici Electrolux/AEG", qty:"1,00", dateComm:"22/03/2025", dateCarico:"20/06/2025", dateConsegna:"11/07/2025", status:"Consegnato" },
+  { code:"8284Esp", cognome:"Esposito", nome:"Antonella", desc:"Living: 2 basi sospese cm 90 con top col. Grigio ferro; pensile, elementi a giorno; Finiture Grigio ferro e Nebbia", qty:"1,00", dateComm:"22/03/2025", dateCarico:"09/07/2025", dateConsegna:"11/07/2025", status:"Consegnato" },
+  { code:"8284Esp", cognome:"Esposito", nome:"Antonella", desc:"Tavolo Infinity 160x90 Struttura nera piano statuario + 6 Sedie (4 Nere - 2 Blu)", qty:"1,00", dateComm:"22/03/2025", dateCarico:"09/07/2025", dateConsegna:"11/07/2025", status:"Consegnato" },
+  { code:"8717DAm", cognome:"D'Ambrosio", nome:"Massimo", desc:"Letto mod. Iris con contenitore da expo, cat. adone col. 04, con piede brunito, bordino gross grain 45", qty:"1,00", dateComm:"09/07/2025", dateCarico:"11/07/2025", dateConsegna:"29/07/2025", status:"Consegnato" },
+  { code:"7814Bis", cognome:"Bisio", nome:"Elisabetta", desc:"Sgabello Painter Young struttura acciaio verniciato Nero Opaco - Fondino Polipropilene Nero", qty:"1,00", dateComm:"11/12/2024", dateCarico:"27/01/2025", dateConsegna:"28/01/2025", status:"Consegnato" },
 ];
 
-let allCommissioni = {};
-let commissioniVisibili = [];
-
-function capitalizza(s) {
-  if (!s) return '';
-  return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
-}
-
-function accediConCodice() {
-  const codice = document.getElementById('codice-input').value.trim();
-  if (!codice) return;
-  const chiave = Object.keys(allCommissioni).find(k => k.toLowerCase() === codice.toLowerCase());
-  if (!chiave) {
-    document.getElementById('login-error').style.display = 'block';
-    return;
-  }
-  document.getElementById('login-error').style.display = 'none';
-  commissioniVisibili = allCommissioni[chiave];
-  document.getElementById('login-box').style.display = 'none';
-  document.getElementById('risultati-box').style.display = 'block';
-  // Nome/cognome dal CSV
-  const info = CSV_NOMI[chiave];
-  let intestatario = '';
-  if (info) {
-    const n = capitalizza(info.n);
-    const c = capitalizza(info.c);
-    intestatario = n && c ? n + ' ' + c : (n || c);
-  }
-  const label = intestatario ? `${intestatario} — Codice: ${chiave}` : `Codice: ${chiave}`;
-  document.getElementById('codice-attivo').textContent = label + ' — ' + commissioniVisibili.length + ' articoli';
-  renderCommissioni(commissioniVisibili);
-}
-
-function tornaLogin() {
-  document.getElementById('risultati-box').style.display = 'none';
-  document.getElementById('login-box').style.display = 'block';
-  document.getElementById('codice-input').value = '';
-  commissioniVisibili = [];
-}
-
-// ── NAVIGAZIONE ──
-function showPage(id, btn) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.bottom-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('page-' + id).classList.add('active');
-  if (btn) btn.classList.add('active');
+// ─── NAVIGATION ──────────────────────────────────────
+function showView(name) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('view-' + name).classList.add('active');
+  const navBtn = document.getElementById('nav-' + name);
+  if (navBtn) navBtn.classList.add('active');
   window.scrollTo(0,0);
 }
 
-// ── COMMISSIONI ──
-function getStatoClass(stato) {
-  if (!stato) return '';
-  const s = stato.toLowerCase();
-  if (s.includes('lavorazione')) return 'stato-lavorazione';
-  if (s.includes('pronto')) return 'stato-pronto';
-  if (s.includes('pianificata')) return 'stato-pianificata';
-  if (s.includes('consegnato')) return 'stato-consegnato';
-  if (s.includes('giacenza')) return 'stato-pianificata';
-  if (s.includes('ordinato')) return 'stato-lavorazione';
-  if (s.includes('attesa')) return 'stato-attesa';
-  return '';
-}
-function getBadgeClass(stato) {
-  if (!stato) return '';
-  const s = stato.toLowerCase();
-  if (s.includes('lavorazione')) return 'badge-lavorazione';
-  if (s.includes('pronto')) return 'badge-pronto';
-  if (s.includes('pianificata')) return 'badge-pianificata';
-  if (s.includes('consegnato')) return 'badge-consegnato';
-  if (s.includes('giacenza')) return 'badge-pianificata';
-  if (s.includes('ordinato')) return 'badge-lavorazione';
-  if (s.includes('attesa')) return 'badge-attesa';
-  return '';
-}
+// ─── SEARCH ──────────────────────────────────────────
+function handleSearch(query) {
+  const q = query.trim().toLowerCase();
+  const list = document.getElementById('ordersList');
+  const empty = document.getElementById('emptyState');
+  const cf = document.getElementById('customerFound');
+  const cfName = document.getElementById('cfName');
+  const cfCode = document.getElementById('cfCode');
 
-function renderCommissioni(data) {
-  const list = document.getElementById('commissioni-list');
-  if (!data || !data.length) {
-    list.innerHTML = '<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-title">Nessun articolo trovato</div></div>';
+  if (!q) {
+    list.innerHTML = '';
+    list.appendChild(empty);
+    empty.style.display = 'block';
+    empty.textContent = 'Inserisci il tuo codice cliente per vedere le commissioni';
+    cf.classList.remove('show');
     return;
   }
-  list.innerHTML = data.map((c,i) => {
-    const desc = c[0] || '—';
-    const dataOrdine = c[1] || '';
-    const dataConsegna = c[2] || '';
-    const stato = c[3] || '—';
-    const descBreve = desc.length > 90 ? desc.substring(0,90) + '…' : desc;
-    return '<div class="comm-card ' + getStatoClass(stato) + '" onclick="openModal(' + i + ')">' +
-      '<div class="comm-top">' +
-        '<span class="comm-id">' + (dataOrdine ? '📅 ' + dataOrdine : '') + '</span>' +
-        '<span class="stato-badge ' + getBadgeClass(stato) + '">' + stato + '</span>' +
-      '</div>' +
-      '<div class="comm-name" style="font-size:14px;font-weight:500;margin-top:4px">' + descBreve + '</div>' +
-      '<div class="comm-meta" style="margin-top:6px">' +
-        (dataConsegna ? '<span>🚚 Consegna: ' + dataConsegna + '</span>' : '') +
-      '</div>' +
-    '</div>';
-  }).join('');
-}
 
-function getSteps(stato) {
-  const steps = [
-    { name: 'Ordine ricevuto', desc: 'Commissione registrata nel sistema' },
-    { name: 'In lavorazione', desc: 'Prodotto in produzione o in arrivo' },
-    { name: 'Pronto', desc: 'Prodotto disponibile in magazzino' },
-    { name: 'Consegna pianificata', desc: 'Data di consegna confermata' },
-    { name: 'Consegnato', desc: 'Consegna completata con successo' },
-  ];
-  let activeIdx = 1;
-  if (stato && stato.includes('Pronto')) activeIdx = 2;
-  else if (stato && stato.includes('Pianificata')) activeIdx = 3;
-  else if (stato && stato.includes('Consegnato')) activeIdx = 4;
-  else if (stato && stato.includes('attesa')) activeIdx = 1;
-  return { steps, activeIdx };
-}
+  const results = orders.filter(o => o.code.toLowerCase().includes(q));
 
-function openModal(idx) {
-  const c = commissioniVisibili[idx];
-  const nome = c[0] || '—';
-  const stato = c[3] || '—';
-  const dataOrdine = c[1] || '—';
-  const dataConsegna = c[2] || 'Da definire';
-  const { steps, activeIdx } = getSteps(stato);
-
-  document.getElementById('modal-body').innerHTML = `
-    <div class="modal-title">${nome}</div>
-    <div class="modal-id">Dettaglio articolo</div>
-    <div class="modal-row"><span class="modal-label">Stato</span><span class="modal-value"><span class="stato-badge ${getBadgeClass(stato)}">${stato}</span></span></div>
-    <div class="modal-row"><span class="modal-label">Data ordine</span><span class="modal-value">${dataOrdine}</span></div>
-    <div class="modal-row"><span class="modal-label">Consegna prevista</span><span class="modal-value">${dataConsegna}</span></div>
-    <div style="margin-top:20px;margin-bottom:4px;font-size:12px;font-weight:600;color:var(--gray);text-transform:uppercase;letter-spacing:0.5px">Avanzamento</div>
-    <div class="timeline">
-      ${steps.map((s,i) => `
-        <div class="timeline-step">
-          <div class="timeline-left">
-            <div class="timeline-dot ${i < activeIdx ? 'done' : i === activeIdx ? 'active' : ''}">${i < activeIdx ? '✓' : i+1}</div>
-            ${i < steps.length-1 ? `<div class="timeline-line ${i < activeIdx ? 'done' : ''}"></div>` : ''}
-          </div>
-          <div class="timeline-content">
-            <div class="timeline-step-name" style="color:${i === activeIdx ? 'var(--red)' : i < activeIdx ? 'var(--gray)' : 'var(--black)'}">${s.name}</div>
-            <div class="timeline-step-desc">${s.desc}</div>
-          </div>
-        </div>
-      `).join('')}
-    </div>
-  `;
-  document.getElementById('modal-overlay').classList.add('open');
-}
-
-function closeModal(e) {
-  if (!e || e.target === document.getElementById('modal-overlay') || !e.target) {
-    document.getElementById('modal-overlay').classList.remove('open');
+  // Show customer name if found
+  if (results.length > 0) {
+    const first = results[0];
+    const displayName = first.nome && first.cognome
+      ? first.nome + ' ' + first.cognome
+      : first.cognome || first.nome || '—';
+    cfName.textContent = displayName;
+    cfCode.textContent = 'Codice: ' + first.code;
+    cf.classList.add('show');
+  } else {
+    cf.classList.remove('show');
   }
-}
 
-// ── ARREDATORI (solo pulsante 3CX messaggio) ──
-function renderArredatori(data) {
-  const list = document.getElementById('arredatori-list');
-  list.innerHTML = data.map(a => {
-    const nome = `${a.nome || ''} ${a.cognome || ''}`.trim();
-    const iniziali = nome.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase();
-    const negozio = a.negozio || '';
-    const cx = a.cx || '';
-    return `
-      <div class="arreda-card">
-        <div class="arreda-avatar">${iniziali}</div>
-        <div class="arreda-info">
-          <div class="arreda-name">${nome}</div>
-          <div class="arreda-store">📍 ${negozio}</div>
-        </div>
-        <div class="arreda-actions">
-          ${cx ? `<a class="arreda-btn btn-3cx" href="${cx}" title="Messaggio 3CX">💬</a>` : ''}
-        </div>
+  list.innerHTML = '';
+
+  if (results.length === 0) {
+    const d = document.createElement('div');
+    d.className = 'no-results';
+    d.textContent = 'Nessun ordine trovato per "' + query + '"';
+    list.appendChild(d);
+    return;
+  }
+
+  results.forEach(o => {
+    const card = document.createElement('div');
+    card.className = 'order-card';
+
+    const statusClass = o.status === 'Consegnato' ? 'badge-status consegnato' : 'badge-status';
+
+    card.innerHTML = `
+      <div class="order-desc">${o.desc}</div>
+      <div class="order-meta">
+        <span class="badge ${statusClass}">${o.status}</span>
+        <span class="badge badge-qty">Qtà ${o.qty}</span>
+        <span class="badge badge-date">Comm. ${o.dateComm}</span>
+        ${o.dateCarico ? `<span class="badge badge-date">Carico ${o.dateCarico}</span>` : ''}
+        ${o.dateConsegna ? `<span class="badge badge-date" style="background:rgba(39,174,96,0.1);color:#1e8449">Cons. ${o.dateConsegna}</span>` : ''}
       </div>
     `;
-  }).join('');
+    list.appendChild(card);
+  });
 }
-
-// ── ASSISTENZA ──
-function inviaAssistenza() {
-  const id = document.getElementById('ass-id').value.trim();
-  const nome = document.getElementById('ass-nome').value.trim();
-  const tipo = document.getElementById('ass-tipo').value;
-  const desc = document.getElementById('ass-desc').value.trim();
-  if (!nome || !tipo || !desc) { alert('Compila tutti i campi obbligatori'); return; }
-  document.getElementById('success-msg').style.display = 'block';
-  document.getElementById('ass-id').value = '';
-  document.getElementById('ass-nome').value = '';
-  document.getElementById('ass-tipo').value = '';
-  document.getElementById('ass-desc').value = '';
-  setTimeout(() => { document.getElementById('success-msg').style.display = 'none'; }, 4000);
-}
-
-// ── CARICAMENTO DATI ──
-function loadData() {
-  allCommissioni = DATI_COMMISSIONI;
-  renderArredatori(DEMO_ARREDATORI);
-  const inp = document.getElementById('codice-input');
-  if (inp) inp.addEventListener('keydown', function(e) { if (e.key === 'Enter') accediConCodice(); });
-}
-
-document.addEventListener('DOMContentLoaded', loadData);
 </script>
+</body>
+</html>
