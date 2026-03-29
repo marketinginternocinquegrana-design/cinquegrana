@@ -6709,6 +6709,12 @@ function showPage(id, btn) {
   if(btn) btn.classList.add('active');
   window.scrollTo(0,0);
 }
+
+// Inizializzazione al caricamento
+document.addEventListener('DOMContentLoaded', function() {
+  renderArredatori(DEMO_ARREDATORI);
+  if(typeof csInitStars === 'function') csInitStars();
+});
 </script>
 </body>
 </html>
