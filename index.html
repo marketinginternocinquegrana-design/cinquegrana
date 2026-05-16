@@ -6499,13 +6499,15 @@ function capitalizza(s) { if(!s) return ''; return s.charAt(0).toUpperCase()+s.s
 function accediConCodice() {
   var codice = document.getElementById('codice-input').value.trim();
   if(!codice) return;
-  var chiave = Object.keys(DATI_COMMISSIONI).find(function(k){ return k.toLowerCase()===codice.toLowerCase(); });
+  var dati = getDatiCommissioni();
+  var chiave = Object.keys(dati).find(function(k){ return k.toLowerCase()===codice.toLowerCase(); });
   if(!chiave) { document.getElementById('login-error').style.display='block'; return; }
   document.getElementById('login-error').style.display='none';
-  commissioniVisibili = DATI_COMMISSIONI[chiave];
+  commissioniVisibili = dati[chiave];
   document.getElementById('login-box').style.display='none';
   document.getElementById('risultati-box').style.display='block';
-  var info = CSV_NOMI[chiave];
+  var nomi = getCsvNomi();
+  var info = nomi[chiave];
   var intestatario = '';
   if(info) { var n=capitalizza(info.n); var c=capitalizza(info.c); intestatario = (n&&c)?n+' '+c:(n||c); }
   var label = intestatario ? intestatario+' — Codice: '+chiave : 'Codice: '+chiave;
@@ -6726,7 +6728,44 @@ function showPage(id, btn) {
 }
 
 // Inizializzazione al caricamento
+const SHEET_API = 'https://script.google.com/macros/s/AKfycbwvqRB4Pn1UisP84M1skJHwCCSZa2ldExMN_yzWOxDJSOZzTjM67TrFHBTnmU4rjKmL_A/exec';
+
+let DATI_LIVE = null;
+let CSV_NOMI_LIVE = {};
+
+async function caricaCommissioni() {
+  try {
+    const resp = await fetch(SHEET_API);
+    const data = await resp.json();
+    DATI_LIVE = {};
+    CSV_NOMI_LIVE = {};
+    for (const [codice, obj] of Object.entries(data)) {
+      CSV_NOMI_LIVE[codice] = { n: obj.nome || '', c: obj.cognome || '' };
+      DATI_LIVE[codice] = obj.commissioni.map(function(c) {
+        return [
+          c.descrizione || '',
+          c.dataCommissione || '',
+          c.dataOrdine || '',
+          parseFloat((c.qtaOrdinata || '0').toString().replace(',', '.')) || 0,
+          (c.qtaConsegnata || '1,00')
+        ];
+      });
+    }
+  } catch(e) {
+    console.warn('Errore caricamento Sheet, uso dati locali:', e);
+  }
+}
+
+function getDatiCommissioni() {
+  return DATI_LIVE || DATI_RAW;
+}
+
+function getCsvNomi() {
+  return Object.keys(CSV_NOMI_LIVE).length ? CSV_NOMI_LIVE : CSV_NOMI;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+  caricaCommissioni();
   renderArredatori(DEMO_ARREDATORI);
   if(typeof csInitStars === 'function') csInitStars();
 });
